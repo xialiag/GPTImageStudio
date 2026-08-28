@@ -1006,9 +1006,10 @@ function switchTab(page) {
 
 // ===== 参数面板 =====
 function toggleParams() {
-  const grid = document.getElementById('paramGrid');
+  const grid = document.getElementById('imageParams');
   const header = document.querySelector('.param-header');
-  grid.classList.toggle('open');
+  if (grid) grid.classList.toggle('open');
+  if (header) header.classList.toggle('open', !!grid && grid.classList.contains('open'));
   header.classList.toggle('open');
 }
 
@@ -2186,8 +2187,8 @@ function setTaskType(type) {
   syncCustomSelect('csModel', 'model', state.model);
   const imgP = document.getElementById('imageParams');
   const vidP = document.getElementById('videoParams');
-  if (imgP) imgP.classList.toggle('hidden', state.taskType === 'video');
-  if (vidP) vidP.classList.toggle('hidden', state.taskType !== 'video');
+  if (imgP) imgP.classList.toggle('open', state.taskType !== 'video');
+  if (vidP) vidP.classList.toggle('open', state.taskType === 'video');
 }
 
 // 视频参数 setter (index.html pill/按钮)
