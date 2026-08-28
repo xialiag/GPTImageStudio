@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.content.res.Configuration
+import android.graphics.Color
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -55,6 +56,8 @@ class MainActivity : AppCompatActivity() {
         WindowCompat.setDecorFitsSystemWindows(window, false)
         window.statusBarColor = android.graphics.Color.TRANSPARENT
         window.navigationBarColor = android.graphics.Color.TRANSPARENT
+        // 冷启动 window 背景深色 (消除 WebView 就绪前的白屏闪)
+        window.setBackgroundDrawable(android.graphics.drawable.ColorDrawable(android.graphics.Color.parseColor("#0E0A1A")))
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -96,6 +99,8 @@ class MainActivity : AppCompatActivity() {
         }
 
         webView.setLayerType(View.LAYER_TYPE_HARDWARE, null)
+        // 深色背景: 避免 WebView 加载 assets 期间默认白屏闪烁
+        webView.setBackgroundColor(Color.parseColor("#0E0A1A"))
 
         // Disable WebView auto-darkening to let CSS handle theming
         if (WebViewFeature.isFeatureSupported(WebViewFeature.FORCE_DARK)) {

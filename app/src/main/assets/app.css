@@ -705,3 +705,13 @@ input[type="range"]::-moz-range-thumb { width: 16px; height: 16px; border-radius
 .task-status-badge.done { color: var(--success); background: rgba(110,231,160,.12); }
 .task-status-badge.error { color: var(--error); background: rgba(251,113,133,.12); }
 .task-status-body { font-size: var(--fs-sm); color: var(--fg); line-height: 1.5; word-break: break-word; }
+/* ===== 启动加载蒙层 ===== */
+.boot-loading { position: fixed; inset: 0; z-index: 9999; background: var(--bg);
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px;
+  transition: opacity .35s ease; }
+.boot-loading.hidden { opacity: 0; pointer-events: none; }
+.boot-spinner { width: 40px; height: 40px; border: 4px solid var(--bg-active); border-top-color: var(--accent);
+  border-radius: 50%; animation: bootSpin 0.9s linear infinite; }
+@keyframes bootSpin { to { transform: rotate(360deg); } }
+.boot-text { font-size: 18px; font-weight: 700; color: var(--fg); letter-spacing: .5px; }
+.boot-sub { font-size: var(--fs-sm); color: var(--fg-dim); }

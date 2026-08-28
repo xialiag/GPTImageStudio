@@ -140,6 +140,9 @@ document.addEventListener('DOMContentLoaded', () => {
   var sh = document.getElementById('sizeH');
   if (sw) sw.addEventListener('blur', setSizeFromInput);
   if (sh) sh.addEventListener('blur', setSizeFromInput);
+  // 初始化为完成 → 隐藏启动蒙层 (替代 WebView 默认白屏)
+  const bl = document.getElementById('bootLoading');
+  if (bl) { bl.classList.add('hidden'); setTimeout(function(){ if (bl && bl.parentNode) bl.parentNode.removeChild(bl); }, 400); }
 });
 
 // ===== 原生桥接 =====
@@ -1992,7 +1995,13 @@ async function generate() {
     if (state.taskType === 'video') {
       updateStatus('正在生成视频...');
       const v = await generateVideo(prompt);
-      if (v) { result.push(v); appendResultImage(v, false); }
+      if (v) {
+        const sv = await autoSaveVideo(v);
+        const item = sv || v;
+        result.push(item);
+        appendResultImage(item, false);
+        await saveImagesHistory([item], prompt, false);
+      }
     } else if (isEdit) {
       updateStatus('正在上传参考图(s)...');
       await generateImageEdit(prompt, onImage);
@@ -2118,6 +2127,7 @@ async function pollVideoTask(pollUrl, id, timeoutMs) {
   const timeout = timeoutMs || 300000; // 默认 5 分钟
   const started = Date.now();
   while (Date.now() - started < timeout) {
+    if (!state.generating) throw new Error('cancel: 用户取消');
     const resp = await apiRequest(apiUrl(state.baseUrl, pollUrl), 'GET', apiJsonHeaders());
     const data = JSON.parse(resp.body);
     if (resp.status >= 400) throw new Error(data.error?.message || `HTTP ${resp.status}`);
@@ -2155,6 +2165,17 @@ function buildVideoBody(prompt, driver) {
     if (state.negativePrompt) body.negative_prompt = state.negativePrompt;
   }
   return body;
+}
+
+// 视频自动落盘(应用私有目录, 防外链过期): 返回带 savedPath 的副本
+async function autoSaveVideo(v) {
+  if (!v || !v.url || !hasNativeBridge() || !NativeBridge.saveVideoToPrivateDir) return v;
+  const name = 'GPTImage_video_' + Date.now() + '_' + Math.random().toString(36).slice(2, 6) + '.mp4';
+  try {
+    const path = await bridgeInvoke('saveVideoToPrivateDir', v.url, name);
+    if (path) return Object.assign({}, v, { savedPath: path });
+  } catch (e) {}
+  return v;
 }
 
 // 视频生成主流程 (异步任务)
@@ -2895,7 +2916,8 @@ function loadHistory() {
 
   filtered.forEach((item, idx) => {
     const isVideo = item.kind === 'video';
-    let src = item.b64 ? `data:image/${item.format || 'png'};base64,${item.b64}` : item.url;
+    // 视频: 有落盘路径优先读本地(防外链过期), 无则用 url; 图片走现有 b64/url
+    let src = item.b64 ? `data:image/${item.format || 'png'};base64,${item.b64}` : (isVideo && item.savedPath ? '' : item.url);
     // 有落盘路径但无 base64(省内存): 从磁盘读(参考 Image Studio, 历史不存大图)
     let pendingRead = false;
     if (!src && item.savedPath && hasNativeBridge() && NativeBridge.readSavedFileAsync) {

@@ -278,6 +278,20 @@ class ImageBridge(
         }
     }
 
+    /** 下载 URL 视频到应用私有目录 (避免外链过期), 返回绝对路径 */
+    @JavascriptInterface
+    fun saveVideoToPrivateDir(videoUrl: String, filename: String): String {
+        return try {
+            val bytes = downloadBytes(videoUrl)
+            val file = saveToAppDir(bytes, filename) ?: return ""
+            Logger.i(TAG, "视频落盘: ${file.absolutePath} bytes=${bytes.size}")
+            file.absolutePath
+        } catch (e: Exception) {
+            Log.e(TAG, "saveVideoToPrivateDir failed", e)
+            ""
+        }
+    }
+
     private fun saveVideoToMediaStore(bytes: ByteArray, filename: String): Boolean {
         return try {
             val outputDir = prefs.getString("save_dir", defaultSaveDir) ?: defaultSaveDir
