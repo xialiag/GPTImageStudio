@@ -57,6 +57,8 @@ const state = {
   manageMode: false,
   // 历史对比基准图 (A)
   historyCompareA: null,
+  // 图像模型列表 (动态从 API 拉取)
+  imageModels: [],
   // 视频模型列表 (动态从 API 拉取, 按 taskType 分流)
   videoModels: [],
   // 模型元数据 (id -> {model_type, supported_endpoint_types, tags}, 供分类/driver 识别)
@@ -65,8 +67,6 @@ const state = {
   taskType: 'image',
   // 视频生成参数
   video: { duration: 5, ratio: '16:9', fps: '' },
-  // LLM 模型列表 (动态从 API 拉取)
-  llmModels: [],
   // LLM 模型列表 (动态从 API 拉取)
   llmModels: [],
   // 多选选中的焚决 ids
@@ -475,8 +475,9 @@ function classifyModelMeta(m) {
   if (mt === '对话' || mt === '检索') return 'other';
   if (mt === '图像') return 'image';
   if (mt === '音视频') {
+    // 音频/实时语音优先排除, 其余(含视频特征)归视频
+    if (/tts|speech|audio|transcribe|suno|music|音效|音频|实时|对话|realtime|voice/.test(hay)) return 'other';
     if (isVideoModelMeta(m)) return 'video';
-    if (/tts|speech|audio|transcribe|suno|music|音效|音频/.test(hay)) return 'other';
     return 'video';
   }
   if (isVideoModelMeta(m)) return 'video';
