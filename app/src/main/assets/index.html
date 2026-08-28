@@ -93,7 +93,7 @@
 
         <!-- 参考图 -->
         <div class="section">
-          <label class="label">参考图 <span class="label-hint">（可选，图生图，支持多图）</span></label>
+          <label class="label">参考图 <span class="label-hint" id="refLabelHint">（可选，图生图，支持多图）</span></label>
           <div class="ref-image-area" id="refImageArea">
             <div class="ref-list" id="refList"></div>
             <div class="ref-upload" id="refUpload" onclick="pickImage()">
@@ -268,6 +268,18 @@
                 <button class="pill" data-val="8" onclick="setVideoParam('duration','8')">8秒</button>
                 <button class="pill" data-val="12" onclick="setVideoParam('duration','12')">12秒</button>
               </div>
+            </div>
+            <div class="param-row">
+              <span class="param-label">帧率</span>
+              <div class="pill-group" id="videoParamsGroup_fps">
+                <button class="pill active" data-val="24" onclick="setVideoParam('fps','24')">24</button>
+                <button class="pill" data-val="30" onclick="setVideoParam('fps','30')">30</button>
+                <button class="pill" data-val="60" onclick="setVideoParam('fps','60')">60</button>
+              </div>
+            </div>
+            <div class="param-row">
+              <span class="param-label">图生视频</span>
+              <span class="input-hint" style="font-size:var(--fs-xs)">上传参考图：第1张为首帧，第2张为尾帧</span>
             </div>
           </div>
         </div>

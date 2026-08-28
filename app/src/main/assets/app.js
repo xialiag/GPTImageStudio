@@ -2140,6 +2140,10 @@ async function pollVideoTask(pollUrl, id, timeoutMs) {
     if (status === 'failed' || status === 'error' || status === 'cancelled') {
       throw new Error(data.message || data.error?.message || '视频生成失败: ' + status);
     }
+    // 进度反馈: 显示排队/处理中状态与已等待秒数
+    const elapsed = Math.round((Date.now() - started) / 1000);
+    const phase = status === 'queued' || status === 'pending' || status === 'waiting' ? '排队中' : '生成中';
+    updateStatus('视频' + phase + ' (已等 ' + elapsed + 's)');
     await sleep(5000);
   }
   throw new Error('视频生成超时(5分钟), 请稍后重试或查看任务');
@@ -2151,7 +2155,16 @@ function buildVideoBody(prompt, driver) {
   const duration = parseInt(state.video.duration) || 5;
   const i2v = state.references.length > 0 && state.references[0] && state.references[0].b64;
   const body = { model: state.model, prompt };
-  if (i2v) body.input_image = 'data:' + (state.references[0].mime || 'image/png') + ';base64,' + state.references[0].b64;
+  if (state.video.fps) body.fps = parseInt(state.video.fps);
+  if (i2v) {
+    // 第1张参考图 = 首帧/输入图, 第2张 = 尾帧 (图生视频)
+    const firstB64 = 'data:' + (state.references[0].mime || 'image/png') + ';base64,' + state.references[0].b64;
+    body.input_image = firstB64;
+    body.first_frame_image = firstB64;
+    if (state.references[1] && state.references[1].b64) {
+      body.last_frame_image = 'data:' + (state.references[1].mime || 'image/png') + ';base64,' + state.references[1].b64;
+    }
+  }
   if (driver === 'openai_video') {
     body.size = ratio === '1:1' ? 'mid' : (ratio === '9:16' ? 'portrait' : (ratio === '16:9' ? 'landscape' : ratio));
     body.seconds = duration;
@@ -2217,6 +2230,11 @@ function setTaskType(type) {
   if (pInput) pInput.placeholder = state.taskType === 'video'
       ? '描述你想生成的视频\n例如: 一只橘猫在窗台上看日落, 镜头缓慢拉近, 微风拂过'
       : '描述你想生成的图片\n例如: 一只橘猫坐在窗台上，窗外是城市夜景，赛博朋克风格';
+  // 参考图区提示随模式切换 (视频 = 首/尾帧)
+  const refHint = document.getElementById('refLabelHint');
+  if (refHint) refHint.textContent = state.taskType === 'video'
+      ? '（可选，图生视频：第1张为首帧，第2张为尾帧）'
+      : '（可选，图生图，支持多图）';
 }
 
 // 视频参数 setter (index.html pill/按钮)
