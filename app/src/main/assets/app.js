@@ -57,8 +57,16 @@ const state = {
   manageMode: false,
   // 历史对比基准图 (A)
   historyCompareA: null,
-  // 图像模型列表 (动态从 API 拉取)
-  imageModels: [],
+  // 视频模型列表 (动态从 API 拉取, 按 taskType 分流)
+  videoModels: [],
+  // 模型元数据 (id -> {model_type, supported_endpoint_types, tags}, 供分类/driver 识别)
+  modelMeta: {},
+  // 生成任务类型: image | video
+  taskType: 'image',
+  // 视频生成参数
+  video: { duration: 5, ratio: '16:9', fps: '' },
+  // LLM 模型列表 (动态从 API 拉取)
+  llmModels: [],
   // LLM 模型列表 (动态从 API 拉取)
   llmModels: [],
   // 多选选中的焚决 ids
@@ -450,6 +458,52 @@ function syncCustomSelect(id, type, value) {
 
 // ===== 模型动态加载 (不硬编码) =====
 // 从 API 拉取模型列表，渲染到指定下拉菜单
+// 模型类型识别: 优先用中转元数据(model_type/tags), 缺省用 id 关键词
+function isVideoModelMeta(m) {
+  const hay = ((m.id || '') + '|' + (m.tags || '')).toLowerCase();
+  return /视频|t2v|i2v|seedance|veo|kling|cogvideo|hailuo|wan2|viu|vidu|grok-imagine-video|happyhorse|pixverse|sora|video|首尾帧|参考生视频|图生视频|文生视频/.test(hay);
+}
+function isImageModelMeta(m) {
+  const hay = ((m.id || '') + '|' + (m.tags || '')).toLowerCase();
+  if (m.model_type === '图像') return true;
+  return /image|img|gpt-image|dall-e|flux|seedream|imagen|nano-banana|t2i|i2i|wanx|wan2.*-image|cogview|sdxl|kolors|hunyuan-image|qwen-image|绘画|photo/.test(hay);
+}
+// 分类: image | video | other
+function classifyModelMeta(m) {
+  const mt = m.model_type || '';
+  const hay = ((m.id || '') + '|' + (m.tags || '')).toLowerCase();
+  if (mt === '对话' || mt === '检索') return 'other';
+  if (mt === '图像') return 'image';
+  if (mt === '音视频') {
+    if (isVideoModelMeta(m)) return 'video';
+    if (/tts|speech|audio|transcribe|suno|music|音效|音频/.test(hay)) return 'other';
+    return 'video';
+  }
+  if (isVideoModelMeta(m)) return 'video';
+  if (isImageModelMeta(m)) return 'image';
+  return 'other';
+}
+// 端点协议 → 驱动名 (决定 请求端点/body/轮询 方式)
+function driverOf(m) {
+  const s = ((m && m.supported_endpoint_types) || []).join(',');
+  if (/OpenAI video format/.test(s)) return 'openai_video';
+  if (/doubao/i.test(s)) return 'doubao_video';
+  if (/hailuo/i.test(s)) return 'hailuo_video';
+  if (/wan/i.test(s)) return 'wan_video';
+  if (/vidu/i.test(s)) return 'vidu_video';
+  if (/happyhorse/i.test(s)) return 'happyhorse_video';
+  if (/kling|lip-sync|motion|digital|omni-video/i.test(s)) return 'kling_video';
+  if (/grok|官方格式/.test(s)) return 'grok_video';
+  if (/pix/i.test(s)) return 'pix_video';
+  if (/image-generation|dall-e-3|images-generations/i.test(s)) return 'openai_images';
+  if (/image-edit|OpenAI image edit/i.test(s)) return 'openai_image_edit';
+  if (/gemini/i.test(s)) return 'gemini_image';
+  if (/MJ/i.test(s)) return 'mj_async';
+  if (/aigc-image|omni-image|openai-绘图/i.test(s)) return 'openai_images';
+  return 'unknown';
+}
+
+// 从 API 拉取模型列表: 保留元数据, 分类后填充 imageModels/videoModels/modelMeta
 async function fetchModels(baseUrl, apiKey) {
   if (!apiKey) return [];
   try {
@@ -458,12 +512,24 @@ async function fetchModels(baseUrl, apiKey) {
     });
     const data = JSON.parse(resp.body);
     if (resp.status === 200 && Array.isArray(data.data)) {
-      return data.data.map(m => m.id).filter(Boolean);
+      const metas = data.data.map(m => ({
+        id: m.id, model_type: m.model_type || '',
+        supported_endpoint_types: m.supported_endpoint_types || [],
+        tags: m.tags || '',
+      })).filter(m => m.id);
+      const img = [], vid = [];
+      metas.forEach(m => {
+        const t = classifyModelMeta(m);
+        state.modelMeta[m.id] = m;
+        if (t === 'image') img.push(m.id);
+        else if (t === 'video') vid.push(m.id);
+      });
+      state.imageModels = img;
+      state.videoModels = vid;
+      return metas;
     }
     return [];
-  } catch {
-    return [];
-  }
+  } catch { return []; }
 }
 
 // 渲染图像模型下拉
@@ -472,7 +538,7 @@ function renderImageModelMenu() {
   if (!menu) return;
   const wrap = document.getElementById('csModel');
   const label = wrap.querySelector('.cs-label');
-  const models = state.imageModels;
+  const models = state.taskType === 'video' ? state.videoModels : state.imageModels;
   if (models.length === 0) {
     menu.innerHTML = '<button class="cs-option" disabled style="color:var(--fg-dim)">暂未加载到模型，请检查 API 配置</button>';
     return;
@@ -497,13 +563,13 @@ function renderImageModelMenu() {
 async function loadImageModels() {
   const key = (state.baseUrl || '') + '|' + (state.apiKey || '');
   // 配置未变且已加载 → 不重复网络请求, 只渲染(避免切 tab 每次都拉 /v1/models 造成延迟)
-  if (key === state._modelsKey && state.imageModels && state.imageModels.length) {
+  if (key === state._modelsKey && state.imageModels && (state.imageModels.length || state.videoModels.length)) {
     renderImageModelMenu();
     syncCustomSelect('csModel', 'model', state.model);
     return;
   }
   state._modelsKey = key;
-  state.imageModels = await fetchModels(state.baseUrl, state.apiKey);
+  await fetchModels(state.baseUrl, state.apiKey);
   renderImageModelMenu();
   syncCustomSelect('csModel', 'model', state.model);
 }
@@ -1921,7 +1987,11 @@ async function generate() {
     const result = [];
     // 流式展示: 完成一张立即追加到结果区(不用等全部)
     const onImage = (img) => { result.push(img); appendResultImage(img, isEdit); };
-    if (isEdit) {
+    if (state.taskType === 'video') {
+      updateStatus('正在生成视频...');
+      const v = await generateVideo(prompt);
+      if (v) { result.push(v); appendResultImage(v, false); }
+    } else if (isEdit) {
       updateStatus('正在上传参考图(s)...');
       await generateImageEdit(prompt, onImage);
     } else {
@@ -1930,8 +2000,8 @@ async function generate() {
     }
     clearInterval(heartbeat);
     resultArea.classList.remove('hidden');
-    updateTaskStatus('生成完成，共 ' + result.length + ' 张', 'done');
-    showToast(`生成完成 · ${result.length} 张图片`);
+    updateTaskStatus('生成完成，共 ' + result.length + (state.taskType === 'video' ? ' 段视频' : ' 张'), 'done');
+    showToast(`生成完成 · ${result.length} ${state.taskType === 'video' ? '段视频' : '张图片'}`);
     // 生成后刷新历史页(数据已落盘, 切回历史即见新图, 读图走缓存)
     loadHistory();
   } catch (e) {
@@ -1996,6 +2066,137 @@ async function generateBatch(prompt) {
   state.refImageB64 = null;
   state.refImageName = null;
   state.maskB64 = null;
+}
+
+// ===== 视频生成 (异步任务基元) =====
+function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
+// 视频端点(相对 baseUrl): 默认 OpenAI 风格 /videos (POST 建任务, GET /videos/{id} 轮询)
+function videoEndpoint() {
+  return state.videoEndpoint || '/videos';
+}
+function normalizeVideoDriver(driver) {
+  // 未知驱动 → 用通用 OpenAI 视频格式 (最兼容中转的 OpenAI 风格)
+  return driver || 'openai_video';
+}
+function cap(s) { return s[0].toUpperCase() + s.slice(1); }
+
+// 从响应中提取视频结果(url): 兼容多种字段路径 (data[]/output[]/video.url/uri/file_id...)
+function resolveVideoResult(data) {
+  const pick = (o) => {
+    if (!o || typeof o !== 'object') return null;
+    if (typeof o.url === 'string') return { url: o.url };
+    if (typeof o.output === 'string') return { url: o.output };
+    if (typeof o.video_url === 'string') return { url: o.video_url };
+    if (typeof o.uri === 'string') return { url: o.uri };
+    if (o.video && typeof o.video === 'object') return pick(o.video);
+    return null;
+  };
+  const r = pick(data);
+  if (r) return r;
+  for (const key of ['data', 'output', 'results', 'videos']) {
+    const arr = data[key];
+    if (Array.isArray(arr)) {
+      for (const item of arr) { const x = pick(item); if (x) return x; }
+    }
+  }
+  return null;
+}
+
+// 提交异步任务 → 返回创建响应
+async function submitVideoTask(body) {
+  const url = apiUrl(state.baseUrl, videoEndpoint());
+  const resp = await apiRequest(url, 'POST', apiJsonHeaders(), body);
+  const data = JSON.parse(resp.body);
+  if (resp.status >= 400) throw new Error(data.error?.message || `HTTP ${resp.status}`);
+  return data;
+}
+
+// 轮询任务直到完成
+async function pollVideoTask(pollUrl, id, timeoutMs) {
+  const timeout = timeoutMs || 300000; // 默认 5 分钟
+  const started = Date.now();
+  while (Date.now() - started < timeout) {
+    const resp = await apiRequest(apiUrl(state.baseUrl, pollUrl), 'GET', apiJsonHeaders());
+    const data = JSON.parse(resp.body);
+    if (resp.status >= 400) throw new Error(data.error?.message || `HTTP ${resp.status}`);
+    const status = (data.status || data.state || '').toLowerCase();
+    const res = resolveVideoResult(data);
+    if (res) return { ...data, ...res };
+    if (status === 'completed' || status === 'succeeded' || status === 'success' || status === 'done') {
+      return data;
+    }
+    if (status === 'failed' || status === 'error' || status === 'cancelled') {
+      throw new Error(data.message || data.error?.message || '视频生成失败: ' + status);
+    }
+    await sleep(5000);
+  }
+  throw new Error('视频生成超时(5分钟), 请稍后重试或查看任务');
+}
+
+// 组装视频生成 body (按 driver)
+function buildVideoBody(prompt, driver) {
+  const ratio = state.video.ratio || '16:9';
+  const duration = parseInt(state.video.duration) || 5;
+  const i2v = state.references.length > 0 && state.references[0] && state.references[0].b64;
+  const body = { model: state.model, prompt };
+  if (i2v) body.input_image = 'data:' + (state.references[0].mime || 'image/png') + ';base64,' + state.references[0].b64;
+  if (driver === 'openai_video') {
+    body.size = ratio === '1:1' ? 'mid' : (ratio === '9:16' ? 'portrait' : (ratio === '16:9' ? 'landscape' : ratio));
+    body.seconds = duration;
+  } else {
+    body.aspect_ratio = ratio;
+    body.duration = duration;
+    body.size = ratio;
+  }
+  if (state.requestPolicy === 'relay') {
+    if (state.seed) body.seed = parseInt(state.seed);
+    if (state.negativePrompt) body.negative_prompt = state.negativePrompt;
+  }
+  return body;
+}
+
+// 视频生成主流程 (异步任务)
+async function generateVideo(prompt) {
+  const meta = state.modelMeta[state.model] || {};
+  const driver = normalizeVideoDriver(driverOf(meta));
+  jsLog('I', 'Video', '生成视频: model=' + state.model + ', driver=' + driver + ', duration=' + state.video.duration + ', ratio=' + state.video.ratio + ', i2v=' + (state.references.length > 0) + ', baseUrl=' + state.baseUrl);
+  const body = buildVideoBody(prompt, driver);
+  const submit = await submitVideoTask(body);
+  const r = resolveVideoResult(submit);
+  if (r) return { ...r, kind: 'video', mime: 'video/mp4', duration: state.video.duration, prompt: prompt, model: state.model };
+  const id = submit.id || submit.task_id || submit.request_id || submit.vid || '';
+  if (!id) throw new Error('视频任务未返回任务 ID: ' + JSON.stringify(submit).slice(0, 200));
+  const pollUrl = videoEndpoint().replace(/\/$/, '') + '/' + id;
+  const done = await pollVideoTask(pollUrl, id);
+  const res = resolveVideoResult(done);
+  if (!res || !res.url) throw new Error('未能从任务结果解析视频地址: ' + JSON.stringify(done).slice(0, 200));
+  return { ...res, kind: 'video', mime: 'video/mp4', duration: state.video.duration, prompt: prompt, model: state.model };
+}
+
+// ===== 任务类型切换 (图像 / 视频) =====
+function setTaskType(type) {
+  state.taskType = type === 'video' ? 'video' : 'image';
+  document.querySelectorAll('#taskTypeGroup .pill').forEach(function(p) {
+    p.classList.toggle('active', p.dataset.task === state.taskType);
+  });
+  renderImageModelMenu();
+  const list = state.taskType === 'video' ? state.videoModels : state.imageModels;
+  if (list.length && !list.includes(state.model)) state.model = list[0];
+  syncCustomSelect('csModel', 'model', state.model);
+  const imgP = document.getElementById('imageParams');
+  const vidP = document.getElementById('videoParams');
+  if (imgP) imgP.classList.toggle('hidden', state.taskType === 'video');
+  if (vidP) vidP.classList.toggle('hidden', state.taskType !== 'video');
+}
+
+// 视频参数 setter (index.html pill/按钮)
+function setVideoParam(key, val) {
+  state.video[key] = val;
+  const el = document.getElementById('video' + cap(key) + 'Val');
+  if (el) el.textContent = val;
+  document.querySelectorAll('#videoParamsGroup_' + key + ' .pill').forEach(function(p) {
+    p.classList.toggle('active', p.dataset.val === val);
+  });
 }
 
 // ===== 文生图 (generate) =====
@@ -2290,6 +2491,7 @@ async function saveImagesHistory(images, prompt, isEdit) {
   for (const img of (images || [])) {
     await saveToHistory({
       prompt, revisedPrompt: img.revised_prompt, b64: img.b64, url: img.url,
+      kind: img.kind || 'image', duration: img.duration,
       size: state.size, quality: state.quality, model: state.model,
       format: state.format, seed: state.seed, style: state.style,
       timestamp: Date.now(), isEdit: !!isEdit,
@@ -2366,27 +2568,14 @@ function autoSaveImage(img) {
 
 // ===== 结果展示 =====
 function resultItemHTML(img, isEdit) {
-  const src = img.b64 ? `data:image/${state.format};base64,${img.b64}` : img.url;
+  const isVideo = img.kind === 'video';
+  const src = isVideo ? img.url : (img.b64 ? `data:image/${state.format};base64,${img.b64}` : img.url);
   const isSel = state.refineSelected.indexOf(src) >= 0;
-  // 记录本张生成图用的参考原图(生成时落盘路径), 供"原图对比"精确匹配
   const refForImg = img.refSavedPath || state.lastEditRefSavedPath || '';
-  return `
-      <img src="${src}" alt="生成结果" loading="lazy">
-      ${isEdit ? `<button class="refine-check ${isSel ? 'on' : ''}" onclick="toggleRefineSelect(this)" data-src="${src}" title="勾选用于「完善提示词」">✓</button>` : ''}
-      <div class="result-actions">
-        <button class="btn-sm btn-accent" onclick="saveResultImage(this)" data-src="${src}" data-target="gallery" data-ref="${refForImg}" title="保存到相册">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
-            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-            <polyline points="7 10 12 15 17 10"/>
-            <line x1="12" y1="15" x2="12" y2="3"/>
-          </svg>
-        </button>
-        <button class="btn-sm" onclick="saveResultImage(this)" data-src="${src}" data-target="dir" title="保存到指定目录">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
-            <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/>
-          </svg>
-          目录
-        </button>
+  const mediaEl = isVideo
+    ? `<video src="${src}" controls playsinline preload="metadata"></video>`
+    : `<img src="${src}" alt="生成结果" loading="lazy">`;
+  const imgOnlyActions = isVideo ? '' : `
         <button class="btn-sm" onclick="copyImageToClipboard(this)" data-src="${src}">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
             <rect x="9" y="9" width="13" height="13" rx="2"/>
@@ -2394,6 +2583,31 @@ function resultItemHTML(img, isEdit) {
           </svg>
           复制
         </button>
+        <button class="btn-sm" onclick="openEditor(this)" data-src="${src}" data-prompt="${(state.lastGeneratePrompt || '').replace(/"/g, '&quot;')}">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
+            <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+          </svg>
+          编辑
+        </button>`;
+  return `
+      ${mediaEl}
+      ${isEdit ? `<button class="refine-check ${isSel ? 'on' : ''}" onclick="toggleRefineSelect(this)" data-src="${src}" title="勾选用于「完善提示词」">✓</button>` : ''}
+      <div class="result-actions">
+        <button class="btn-sm btn-accent" onclick="saveResultImage(this)" data-src="${src}" data-target="gallery" data-ref="${refForImg}" data-kind="${isVideo ? 'video' : 'image'}" title="保存到相册">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+            <polyline points="7 10 12 15 17 10"/>
+            <line x1="12" y1="15" x2="12" y2="3"/>
+          </svg>
+        </button>
+        <button class="btn-sm" onclick="saveResultImage(this)" data-src="${src}" data-target="dir" data-kind="${isVideo ? 'video' : 'image'}" title="保存到指定目录">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/>
+          </svg>
+          目录
+        </button>
+        ${imgOnlyActions}
         ${isEdit ? `<button class="btn-sm" onclick="refinePromptWithImage(this)" data-src="${src}" title="用此图与原图对比，完善反推提示词">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" width="13" height="13"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>
           完善提示词
@@ -2402,13 +2616,6 @@ function resultItemHTML(img, isEdit) {
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" width="13" height="13"><path d="M12 3v18"/><rect x="3" y="3" width="18" height="18" rx="2"/></svg>
           原图对比
         </button>` : ''}
-        <button class="btn-sm" onclick="openEditor(this)" data-src="${src}" data-prompt="${(state.lastGeneratePrompt || '').replace(/"/g, '&quot;')}">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
-            <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
-            <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
-          </svg>
-          编辑
-        </button>
       </div>`;
 }
 
@@ -2454,47 +2661,8 @@ function displayResults(images, isEdit) {
     const refForImg = img.refSavedPath || state.lastEditRefSavedPath || '';
     const div = document.createElement('div');
     div.className = 'result-item' + (isSel ? ' refine-selected' : '');
-    div.innerHTML = `
-      <img src="${src}" alt="生成结果" loading="lazy">
-      ${isEdit ? `<button class="refine-check ${isSel ? 'on' : ''}" onclick="toggleRefineSelect(this)" data-src="${src}" title="勾选用于「完善提示词」">✓</button>` : ''}
-      <div class="result-actions">
-        <button class="btn-sm btn-accent" onclick="saveResultImage(this)" data-src="${src}" data-target="gallery" data-ref="${refForImg}" title="保存到相册">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
-            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-            <polyline points="7 10 12 15 17 10"/>
-            <line x1="12" y1="15" x2="12" y2="3"/>
-          </svg>
-…
-        </button>
-        <button class="btn-sm" onclick="saveResultImage(this)" data-src="${src}" data-target="dir" title="保存到指定目录">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
-            <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/>
-          </svg>
-          目录
-        </button>
-        <button class="btn-sm" onclick="copyImageToClipboard(this)" data-src="${src}">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
-            <rect x="9" y="9" width="13" height="13" rx="2"/>
-            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
-          </svg>
-          复制
-        </button>
-        ${isEdit ? `<button class="btn-sm" onclick="refinePromptWithImage(this)" data-src="${src}" title="用此图与原图对比，完善反推提示词">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" width="13" height="13"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>
-          完善提示词
-        </button>
-        <button class="btn-sm" onclick="openRefCompare(this)" data-src="${src}" data-ref="${refForImg}" title="生成图与原图分屏对比查看">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" width="13" height="13"><path d="M12 3v18"/><rect x="3" y="3" width="18" height="18" rx="2"/></svg>
-          原图对比
-        </button>` : ''}
-        <button class="btn-sm" onclick="openEditor(this)" data-src="${src}" data-prompt="${(state.lastGeneratePrompt || '').replace(/"/g, '&quot;')}">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
-            <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
-            <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
-          </svg>
-          编辑
-        </button>
-      </div>`;
+    div.innerHTML = resultItemHTML(img, isEdit);
+
     grid.appendChild(div);
   });
 
@@ -2512,7 +2680,7 @@ function displayResults(images, isEdit) {
 
   area.classList.remove('hidden');
   area.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-  showToast(`生成完成 · ${images.length} 张图片`);
+  showToast(`生成完成 · ${images.length} ${state.taskType === 'video' ? '段视频' : '张图片'}`);
 }
 
 // 更新已勾选完善的数量
@@ -2595,6 +2763,8 @@ function saveWithPermission(b64, name, src, isUrl) {
 async function saveResultImage(btnOrSrc, ts) {
   const src = typeof btnOrSrc === 'string' ? btnOrSrc : (btnOrSrc && btnOrSrc.dataset && btnOrSrc.dataset.src);
   const target = (btnOrSrc && btnOrSrc.dataset && btnOrSrc.dataset.target) || 'gallery';
+  // 记录媒体类型(图片/视频), 决定保存方式与扩展名
+  const kind = (btnOrSrc && btnOrSrc.dataset && btnOrSrc.dataset.kind) || 'image';
   // 规范化时间戳(只留数字), 防止传入含扩展名的字符串导致 .xxx.png.png
   if (typeof ts === 'string' && !/^\d+$/.test(ts)) {
     const m = ts.match(/\d+/);
@@ -2618,10 +2788,13 @@ async function saveResultImage(btnOrSrc, ts) {
       showToast('已下载');
     }
   } else if (src.startsWith('http')) {
-    const name = `GPTImage_${ts}.png`;
+    const name = kind === 'video' ? `GPTImage_${ts}.mp4` : `GPTImage_${ts}.png`;
     if (hasNativeBridge()) {
       if (target === 'dir') {
         saveWithPermission('', name, src, true);
+      } else if (kind === 'video') {
+        const ok = NativeBridge.saveVideoFromUrl(src, name);
+        showToast(ok ? '已保存到相册' : '保存到相册失败', ok ? 'ok' : 'error');
       } else {
         const ok = NativeBridge.saveImageFromUrl(src, name);
         showToast(ok ? '已保存到相册' : '保存到相册失败', ok ? 'ok' : 'error');
@@ -2712,6 +2885,7 @@ function loadHistory() {
   grid.innerHTML = '';
 
   filtered.forEach((item, idx) => {
+    const isVideo = item.kind === 'video';
     let src = item.b64 ? `data:image/${item.format || 'png'};base64,${item.b64}` : item.url;
     // 有落盘路径但无 base64(省内存): 从磁盘读(参考 Image Studio, 历史不存大图)
     let pendingRead = false;
@@ -2730,8 +2904,8 @@ function loadHistory() {
     div.className = 'history-item' + (isFav ? ' faved' : '');
     div.setAttribute('data-ts', item.timestamp);
     div.innerHTML = `
-      <img src="${src}" alt="" loading="lazy">
-      <span class="hi-badge ${item.isEdit ? 'edit' : 'gen'}">${item.isEdit ? '图生图' : '文生图'}</span>
+      ${isVideo ? '<video src="' + src + '" controls playsinline preload="metadata"></video>' : '<img src="' + src + '" alt="" loading="lazy">'}
+      <span class="hi-badge ${item.isEdit ? 'edit' : (isVideo ? 'video' : 'gen')}">${isVideo ? '视频' : (item.isEdit ? '图生图' : '文生图')}</span>
       <div class="hi-prompt">${escapeHtml(item.prompt)}</div>
       <button class="hi-fav ${isFav ? 'faved' : ''}" onclick="event.stopPropagation();toggleFavHistory(${favKey})" title="收藏">${favIcon}</button>
       <button class="hi-reuse" onclick="event.stopPropagation();reuseHistoryItem(${item.timestamp})" title="填入提示词/参考图/参数到生成页">填入</button>
@@ -3033,11 +3207,14 @@ function initCompareDrag() {
 async function openPreview(item, src) {
   state.previewItem = item;
   const img = document.getElementById('previewImage');
+  const vid = document.getElementById('previewVideo');
   // 兜底: 未带 src(异步读图未完成)时从落盘路径读, 保证预览能显示
   if (!src && item && item.savedPath && hasNativeBridge() && NativeBridge.readSavedFileAsync) {
     src = await cachedReadFile(item.savedPath);
   }
-  img.src = src || '';
+  const isVideo = !!item && item.kind === 'video';
+  if (vid) { vid.src = src || ''; vid.classList.toggle('hidden', !isVideo); }
+  if (img) { img.src = src || ''; img.classList.toggle('hidden', isVideo); }
   // 文生图无参考原图 → 隐藏 完善/对比 按钮
   const isEdit = !!item.isEdit;
   const rp = document.getElementById('refinePreviewBtn');
@@ -3070,8 +3247,20 @@ function savePreviewImage() {
     try { src = NativeBridge.readSavedFile(item.savedPath); } catch (e) {}
   }
   if (src) {
-    // 只传时间戳(纯数字), 扩展名由 saveResultImage 统一生成, 避免 .xxx.png.png
-    saveResultImage(src, item.timestamp);
+    if (item.kind === 'video') {
+      // 视频预览保存: 直接下载 url(相册)
+      const vname = 'GPTImage_' + (item.timestamp || Date.now()) + '.mp4';
+      if (hasNativeBridge() && NativeBridge.saveVideoFromUrl) {
+        const ok = NativeBridge.saveVideoFromUrl(src, vname);
+        showToast(ok ? '已保存到相册' : '保存到相册失败', ok ? 'ok' : 'error');
+      } else {
+        const a = document.createElement('a'); a.href = src; a.download = vname; a.target = '_blank'; a.click();
+        showToast('已下载');
+      }
+    } else {
+      // 只传时间戳(纯数字), 扩展名由 saveResultImage 统一生成, 避免 .xxx.png.png
+      saveResultImage(src, item.timestamp);
+    }
   }
 }
 

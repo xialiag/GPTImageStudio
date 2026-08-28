@@ -266,6 +266,44 @@ class ImageBridge(
         }
     }
 
+    /** 保存 URL 视频到相册 (MediaStore.Video, MP4) */
+    @JavascriptInterface
+    fun saveVideoFromUrl(videoUrl: String, filename: String): Boolean {
+        return try {
+            val bytes = downloadBytes(videoUrl)
+            saveVideoToMediaStore(bytes, filename)
+        } catch (e: Exception) {
+            Log.e(TAG, "saveVideoFromUrl failed", e)
+            false
+        }
+    }
+
+    private fun saveVideoToMediaStore(bytes: ByteArray, filename: String): Boolean {
+        return try {
+            val outputDir = prefs.getString("save_dir", defaultSaveDir) ?: defaultSaveDir
+            val values = ContentValues().apply {
+                put(MediaStore.Video.Media.DISPLAY_NAME, filename)
+                put(MediaStore.Video.Media.MIME_TYPE, "video/mp4")
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                    put(MediaStore.Video.Media.RELATIVE_PATH, outputDir)
+                    put(MediaStore.Video.Media.IS_PENDING, 1)
+                }
+            }
+            val resolver = activity.contentResolver
+            val uri = resolver.insert(MediaStore.Video.Media.EXTERNAL_CONTENT_URI, values) ?: return false
+            resolver.openOutputStream(uri)?.use { os -> os.write(bytes) } ?: return false
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                values.clear()
+                values.put(MediaStore.Video.Media.IS_PENDING, 0)
+                resolver.update(uri, values, null, null)
+            }
+            true
+        } catch (e: Exception) {
+            Log.e(TAG, "MediaStore video save failed", e)
+            false
+        }
+    }
+
     // 下载图片二进制 (保存到目录用)
     private fun downloadBytes(url: String): ByteArray {
         val client = getOkHttpClient()
