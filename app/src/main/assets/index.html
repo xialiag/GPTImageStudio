@@ -247,14 +247,6 @@
               <input type="text" id="userIdentifierInput" class="input" placeholder="user-...">
             </div>
           </div>
-        </div>
-
-        <!-- 参数预设 -->
-        <div class="section">
-          <div class="param-header" onclick="document.getElementById('presetSection').classList.toggle('open')">
-            <label class="label" style="margin:0">参数预设</label>
-            <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
-          </div>
           <div class="param-grid" id="videoParams">
             <div class="param-row">
               <span class="param-label">比例</span>
@@ -272,6 +264,14 @@
                 <button class="pill" data-val="12" onclick="setVideoParam('duration','12')">12秒</button>
               </div>
             </div>
+          </div>
+        </div>
+
+        <!-- 参数预设 -->
+        <div class="section">
+          <div class="param-header" onclick="document.getElementById('presetSection').classList.toggle('open')">
+            <label class="label" style="margin:0">参数预设</label>
+            <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
           </div>
           <div class="param-grid" id="presetSection">
             <button class="btn-sm btn-accent" onclick="saveCurrentAsPreset()" style="width:100%">保存当前参数为预设</button>

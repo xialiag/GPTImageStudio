@@ -2189,6 +2189,13 @@ function setTaskType(type) {
   const vidP = document.getElementById('videoParams');
   if (imgP) imgP.classList.toggle('open', state.taskType !== 'video');
   if (vidP) vidP.classList.toggle('open', state.taskType === 'video');
+  // 界面区分: 生成按钮文案 + 提示词占位随任务类型切换
+  const genSpan = document.querySelector('#generateBtn span');
+  if (genSpan) genSpan.textContent = state.taskType === 'video' ? '生成视频' : '开始生成';
+  const pInput = document.getElementById('promptInput');
+  if (pInput) pInput.placeholder = state.taskType === 'video'
+      ? '描述你想生成的视频\n例如: 一只橘猫在窗台上看日落, 镜头缓慢拉近, 微风拂过'
+      : '描述你想生成的图片\n例如: 一只橘猫坐在窗台上，窗外是城市夜景，赛博朋克风格';
 }
 
 // 视频参数 setter (index.html pill/按钮)
