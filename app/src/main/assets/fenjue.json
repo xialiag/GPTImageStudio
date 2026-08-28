@@ -1,0 +1,2052 @@
+[
+  {
+    "id": "re-001",
+    "name": "超写实人像",
+    "category": "reality",
+    "builtin": true,
+    "prompt": "Ultra-realistic portrait of a young woman, soft natural window light, shallow depth of field, 85mm lens, skin pores visible, cinematic retouching, photorealistic 8k, sharp focus，sitting by the window, elbows on sill, soft wistful smile, head slightly tilted",
+    "tags": [
+      "写实",
+      "人像",
+      "自然光"
+    ]
+  },
+  {
+    "id": "re-002",
+    "name": "街拍纪实",
+    "category": "reality",
+    "builtin": true,
+    "prompt": "Candid street photography, rainy city at dusk, neon reflections on wet pavement, people with umbrellas, cinematic color grade, film grain, 35mm street style，walking casually with a soft smile, looking back over shoulder, dynamic street pose",
+    "tags": [
+      "纪实",
+      "街头",
+      "雨天"
+    ]
+  },
+  {
+    "id": "re-003",
+    "name": "静物摄影",
+    "category": "reality",
+    "builtin": true,
+    "prompt": "Still life photography, ceramic vase with fresh flowers on rustic wooden table, soft morning light, macro details, neutral tones, high-end product shot, realistic，turning to look back with a gentle smile, one hand reaching toward a blossom",
+    "tags": [
+      "静物",
+      "产品",
+      "木桌"
+    ]
+  },
+  {
+    "id": "re-004",
+    "name": "宠物特写",
+    "category": "reality",
+    "builtin": true,
+    "prompt": "Close-up of a fluffy golden retriever puppy, big expressive eyes, soft golden hour light, blurred garden background, ultra detailed fur, photorealistic，turning to look back with a gentle smile, one hand reaching toward a blossom",
+    "tags": [
+      "宠物",
+      "特写",
+      "暖光"
+    ]
+  },
+  {
+    "id": "re-005",
+    "name": "完美写真女神",
+    "category": "reality",
+    "builtin": true,
+    "prompt": "Photorealistic portrait of a cute young girl in her 20s, adorable expressive eyes, radiant youthful smile, soft studio light with rim lighting, pink pastel evening dress, luxurious background bokeh, high-end magazine quality, 85mm lens, sharp focus, fresh and bright",
+    "tags": [
+      "写实",
+      "女神",
+      "棚拍"
+    ]
+  },
+  {
+    "id": "re-006",
+    "name": "清纯邻家女孩",
+    "category": "reality",
+    "builtin": true,
+    "prompt": "Natural candid portrait of a fresh-faced young girl, light makeup, white t-shirt, soft morning sunlight, blurred city street background, warm natural tones, genuine smile, lifestyle photography",
+    "tags": [
+      "写实",
+      "清纯",
+      "生活"
+    ]
+  },
+  {
+    "id": "re-007",
+    "name": "成熟御姐",
+    "category": "reality",
+    "builtin": true,
+    "prompt": "Realistic portrait of a cute young girl, big sparkling eyes, adorable expression, casual chic blazer, low-key dramatic lighting, dark moody background, professional photography, film-like texture, youthful charm，elegant relaxed pose, soft smile, hand gently touching her collar",
+    "tags": [
+      "写实",
+      "御姐",
+      "成熟"
+    ]
+  },
+  {
+    "id": "re-008",
+    "name": "韩系氛围感",
+    "category": "reality",
+    "builtin": true,
+    "prompt": "Korean aesthetic portrait, soft pastel tones, dreamy bokeh, delicate features, stylish casual outfit, coffee shop or city ambiance, gentle lighting, fashion editorial vibe, photorealistic，seated pose with one hand resting gently on her cheek, warm smile, holding a coffee cup softly",
+    "tags": [
+      "写实",
+      "韩系",
+      "氛围"
+    ]
+  },
+  {
+    "id": "an-001",
+    "name": "日系动漫少女",
+    "category": "anime",
+    "builtin": true,
+    "prompt": "Anime style girl, long flowing hair, big sparkling eyes, cherry blossom petals falling, school uniform, vibrant pastel colors, cel shading, clean line art, studio quality，standing with a cheerful smile, waving one hand, lively school pose",
+    "tags": [
+      "动漫",
+      "少女",
+      "樱花"
+    ]
+  },
+  {
+    "id": "an-002",
+    "name": "赛博朋克动漫",
+    "category": "anime",
+    "builtin": true,
+    "prompt": "Cyberpunk anime girl in neon-lit futuristic city, holographic ads, purple and cyan color scheme, detailed mecha accessories, dramatic lighting, 2D anime art，hands clasped together near her chest, cheerful sparkly eyes, bouncing youthful pose",
+    "tags": [
+      "赛博朋克",
+      "霓虹",
+      "未来"
+    ]
+  },
+  {
+    "id": "an-003",
+    "name": "治愈系插画",
+    "category": "anime",
+    "builtin": true,
+    "prompt": "Cozy anime illustration, girl reading by a warm window, coffee steam, soft pastel palette, gentle sunlight, kawaii aesthetic, detailed background, heartwarming scene，seated pose with one hand resting gently on her cheek, warm smile, holding a coffee cup softly",
+    "tags": [
+      "治愈",
+      "温暖",
+      "插画"
+    ]
+  },
+  {
+    "id": "an-004",
+    "name": "热血战斗场景",
+    "category": "anime",
+    "builtin": true,
+    "prompt": "Dynamic anime battle scene, two characters clashing with energy effects, motion blur, dramatic speed lines, bold colors, intense action pose, shonen manga style",
+    "tags": [
+      "热血",
+      "战斗",
+      "动态"
+    ]
+  },
+  {
+    "id": "an-005",
+    "name": "呆萌双马尾",
+    "category": "anime",
+    "builtin": true,
+    "prompt": "Kawaii anime girl with twin ponytails, big round eyes, blush on cheeks, cat-ear headband, pastel maid outfit, soft pink background with sparkles, chibi-cute style, high detail，hands clasped together near her chest, cheerful sparkly eyes, bouncing youthful pose",
+    "tags": [
+      "动漫",
+      "双马尾",
+      "可爱"
+    ]
+  },
+  {
+    "id": "an-006",
+    "name": "御姐型动漫",
+    "category": "anime",
+    "builtin": true,
+    "prompt": "Cute anime girl, black long hair softly curled, big round innocent eyes, stylish fitted dress, dramatic lighting, dark atmospheric background, youthful kawaii anime style, detailed illustration, sweet and lively，hands clasped together near her chest, cheerful sparkly eyes, bouncing youthful pose",
+    "tags": [
+      "动漫",
+      "御姐",
+      "优雅"
+    ]
+  },
+  {
+    "id": "an-007",
+    "name": "二次元古风",
+    "category": "anime",
+    "builtin": true,
+    "prompt": "Cute anime girl in traditional Chinese hanfu, flowing silk sleeves, delicate flower patterns, soft watercolor background, cherry blossom petals, sweet pose, refined anime illustration, adorable",
+    "tags": [
+      "动漫",
+      "古风",
+      "汉服"
+    ]
+  },
+  {
+    "id": "an-008",
+    "name": "二次元校园",
+    "category": "anime",
+    "builtin": true,
+    "prompt": "Anime scene of a lively school girl, sailor uniform, walking through sunny school corridor, cherry blossom trees outside window, bright cheerful colors, detailed background, slice of life anime style",
+    "tags": [
+      "动漫",
+      "校园",
+      "青春"
+    ]
+  },
+  {
+    "id": "il-001",
+    "name": "水彩插画",
+    "category": "illustration",
+    "builtin": true,
+    "prompt": "Watercolor illustration of a quiet garden path, soft color bleeding, delicate wet-on-wet technique, light and airy, paper texture visible, artistic and dreamy，turning to look back with a gentle smile, one hand reaching toward a blossom",
+    "tags": [
+      "水彩",
+      "花园",
+      "淡雅"
+    ]
+  },
+  {
+    "id": "il-002",
+    "name": "油画风景",
+    "category": "illustration",
+    "builtin": true,
+    "prompt": "Oil painting landscape, rolling hills at sunset, thick impasto brushstrokes, warm golden and crimson palette, impressionist style, canvas texture, masterpiece",
+    "tags": [
+      "油画",
+      "日落",
+      "印象派"
+    ]
+  },
+  {
+    "id": "il-003",
+    "name": "扁平矢量",
+    "category": "illustration",
+    "builtin": true,
+    "prompt": "Flat vector illustration, minimal geometric shapes, modern abstract composition, bold solid colors, clean negative space, corporate brochure style, crisp edges",
+    "tags": [
+      "扁平",
+      "矢量",
+      "现代"
+    ]
+  },
+  {
+    "id": "il-004",
+    "name": "吉卜力风",
+    "category": "illustration",
+    "builtin": true,
+    "prompt": "Studio Ghibli style background, lush green countryside, white clouds in blue sky, nostalgic Japanese village, lush meadows, detailed foliage, warm atmosphere, high detail",
+    "tags": [
+      "吉卜力",
+      "乡村",
+      "治愈"
+    ]
+  },
+  {
+    "id": "sc-001",
+    "name": "雪山日出",
+    "category": "landscape",
+    "builtin": true,
+    "prompt": "Majestic snow-covered mountain peak at sunrise, golden alpen glow, dramatic clouds, alpine lake reflection, ultra wide angle, crisp detail, breathtaking National Geographic",
+    "tags": [
+      "雪山",
+      "日出",
+      "壮观"
+    ]
+  },
+  {
+    "id": "sc-002",
+    "name": "森林晨雾",
+    "category": "landscape",
+    "builtin": true,
+    "prompt": "Misty pine forest at dawn, sunbeams through the trees, soft fog, moss-covered ground, tranquil atmosphere, cinematic composition, lush greens and cool tones",
+    "tags": [
+      "森林",
+      "晨雾",
+      "静谧"
+    ]
+  },
+  {
+    "id": "sc-003",
+    "name": "星空银河",
+    "category": "landscape",
+    "builtin": true,
+    "prompt": "Milky Way galaxy over a desert night landscape, starry sky, timelapse long exposure, deep blue and purple tones, silhouetted rock formations, astrophotography",
+    "tags": [
+      "星空",
+      "银河",
+      "夜景"
+    ]
+  },
+  {
+    "id": "sc-004",
+    "name": "海滨日落",
+    "category": "landscape",
+    "builtin": true,
+    "prompt": "Serene beach sunset, gentle waves crashing on shore, gradient orange and pink sky, palm trees silhouette, golden reflection on water, peaceful tropical vibe，hand gently touching her hair, looking up with a bright smile, breezy summer pose",
+    "tags": [
+      "海边",
+      "日落",
+      "暖色"
+    ]
+  },
+  {
+    "id": "sf-001",
+    "name": "未来都市",
+    "category": "sci-fi",
+    "builtin": true,
+    "prompt": "Futuristic metropolis at night, towering skyscrapers with neon holograms, flying vehicles, blade runner atmosphere, high-tech sci-fi concept art, volumetric lighting，confident stance, one hand raised in a cool gesture, sweeping dynamic pose",
+    "tags": [
+      "未来",
+      "都市",
+      "霓虹"
+    ]
+  },
+  {
+    "id": "sf-002",
+    "name": "太空探索",
+    "category": "sci-fi",
+    "builtin": true,
+    "prompt": "Astronaut exploring an alien planet, colorful nebula in sky, spacesuit details, mysterious terrain, cinematic sci-fi, epic scale, hyper-realistic，confident stance, one hand raised in a cool gesture, sweeping dynamic pose",
+    "tags": [
+      "太空",
+      "宇航员",
+      "外星"
+    ]
+  },
+  {
+    "id": "sf-003",
+    "name": "机甲战士",
+    "category": "sci-fi",
+    "builtin": true,
+    "prompt": "Giant mecha robot in a ruined city, intricate mechanical detail, glowing energy core, dramatic low angle, post-apocalyptic atmosphere, mecha anime style，hands clasped together near her chest, cheerful sparkly eyes, bouncing youthful pose",
+    "tags": [
+      "机甲",
+      "战斗",
+      "废墟"
+    ]
+  },
+  {
+    "id": "sf-004",
+    "name": "赛博人像",
+    "category": "sci-fi",
+    "builtin": true,
+    "prompt": "Cyberpunk portrait of a futuristic android, glowing circuit patterns on skin, neon city bokeh background, reflective visor, high-tech fashion, cinematic lighting，confident stance, one hand raised in a cool gesture, sweeping dynamic pose",
+    "tags": [
+      "赛博朋克",
+      "人像",
+      "机械"
+    ]
+  },
+  {
+    "id": "po-001",
+    "name": "古风美人",
+    "category": "portrait",
+    "builtin": true,
+    "prompt": "Cute young girl in elegant Chinese traditional qipao, delicate hair ornaments, soft plum blossom background, classical hanfu style, graceful sweet pose, pastel tones, refined, youthful charm",
+    "tags": [
+      "古风",
+      "汉服",
+      "优雅"
+    ]
+  },
+  {
+    "id": "po-002",
+    "name": "时尚模特",
+    "category": "portrait",
+    "builtin": true,
+    "prompt": "High-fashion model, avant-garde outfit, dramatic studio lighting, editorial magazine pose, sharp sculptural look, neutral gray backdrop, vogue style photography",
+    "tags": [
+      "时尚",
+      "模特",
+      "大片"
+    ]
+  },
+  {
+    "id": "po-003",
+    "name": "精灵奇幻",
+    "category": "portrait",
+    "builtin": true,
+    "prompt": "Fantasy elf character, pointed ears, intricate elven armor, glowing forest backdrop, mystical blue light, high fantasy concept art, detailed face painting, one hand reaching out toward a glowing light, graceful flowing pose, gentle smile",
+    "tags": [
+      "奇幻",
+      "精灵",
+      "魔法"
+    ]
+  },
+  {
+    "id": "po-004",
+    "name": "都市女孩",
+    "category": "portrait",
+    "builtin": true,
+    "prompt": "Beautiful young woman in a city cafe, holding a coffee cup, warm lighting, cozy fall outfit, blurred modern background, lifestyle photography, candid smile",
+    "tags": [
+      "都市",
+      "生活",
+      "咖啡"
+    ]
+  },
+  {
+    "id": "ph-001",
+    "name": "胶片质感",
+    "category": "photo",
+    "builtin": true,
+    "prompt": "Vintage film photography, kodak portra 400 look, warm grain, soft skin tones, 50mm lens, nostalgic 90s aesthetic, natural light, subtle vignette",
+    "tags": [
+      "胶片",
+      "复古",
+      "相片"
+    ]
+  },
+  {
+    "id": "ph-002",
+    "name": "黑白纪实",
+    "category": "photo",
+    "builtin": true,
+    "prompt": "Black and white documentary photography, dramatic chiaroscuro lighting, strong contrast, timeless street scene, emotional human moment, fine art photography，walking casually with a soft smile, looking back over shoulder, dynamic street pose",
+    "tags": [
+      "黑白",
+      "纪实",
+      "光影"
+    ]
+  },
+  {
+    "id": "ph-003",
+    "name": "长曝光水流",
+    "category": "photo",
+    "builtin": true,
+    "prompt": "Long exposure photography, silky smooth waterfall, misty rocks, dreamy motion blur, cool blue tones, landscape fine art, tripod shot, ethereal",
+    "tags": [
+      "长曝光",
+      "瀑布",
+      "丝绸"
+    ]
+  },
+  {
+    "id": "ph-004",
+    "name": "微距昆虫",
+    "category": "photo",
+    "builtin": true,
+    "prompt": "Macro photography of a colorful butterfly, crisp wing detail, dew drops, shallow depth of field, natural background blur, hyper sharp, entomology studio quality",
+    "tags": [
+      "微距",
+      "蝴蝶",
+      "细节"
+    ]
+  },
+  {
+    "id": "ds-001",
+    "name": "极简海报",
+    "category": "design",
+    "builtin": true,
+    "prompt": "Minimalist poster design, abstract geometric composition, one bold focal point, generous negative space, modern Swiss design style, duotone color palette",
+    "tags": [
+      "极简",
+      "海报",
+      "设计"
+    ]
+  },
+  {
+    "id": "ds-002",
+    "name": "游戏原画",
+    "category": "design",
+    "builtin": true,
+    "prompt": "Epic game concept art, fantasy warrior in dramatic pose, rich detailed environment, dynamic lighting, AAA game splash art, polished detail, key illustration",
+    "tags": [
+      "游戏",
+      "原画",
+      "史诗"
+    ]
+  },
+  {
+    "id": "ds-003",
+    "name": "logo灵感",
+    "category": "design",
+    "builtin": true,
+    "prompt": "Modern logo concept, geometric letterform, minimal monogram, clean vector style, professional branding, subtle gradient accent, white background, scalable",
+    "tags": [
+      "logo",
+      "品牌",
+      "简洁"
+    ]
+  },
+  {
+    "id": "ds-004",
+    "name": "国潮插画",
+    "category": "design",
+    "builtin": true,
+    "prompt": "Chinese trendy illustration (guochao), traditional patterns with modern twist, vivid red and gold colors, dynamic composition, cultural elements, bold graphic style",
+    "tags": [
+      "国潮",
+      "传统",
+      "现代"
+    ]
+  },
+  {
+    "id": "cv-001",
+    "name": "二次元转手机摄影",
+    "category": "convert",
+    "builtin": true,
+    "prompt": "参考这张二次元少女图，将其转换为手机摄影风格，画面略微模糊失焦，低饱和度，拍摄一个漂亮少女的低角度仰视特写自拍，她眉眼清晰，带着些许慵懒犯困的眼神，头发有些凌乱，背景露出部分天花板和一些灯光，她自然地用一只手撑着下巴，少女的发丝更显凌乱，灯光氛围更柔和朦胧。原比例。，回眸浅笑。",
+    "tags": [
+      "二次元转写实",
+      "手机摄影",
+      "特写"
+    ]
+  },
+  {
+    "id": "cv-002",
+    "name": "二次元转胶片人像",
+    "category": "convert",
+    "builtin": true,
+    "prompt": "参考这张动漫人物图，转换为复古胶片相机拍摄的写实人像，35mm 胶片质感，轻微颗粒感，暖黄色调，柔和的侧逆光，人物皮肤有真实纹理，背景是咖啡馆窗边的光斑，氛围安静怀旧，人物自然放松地坐着，一手轻托脸颊，温柔微笑。原比例。",
+    "tags": [
+      "二次元转写实",
+      "胶片",
+      "人像"
+    ]
+  },
+  {
+    "id": "cv-003",
+    "name": "二次元转油画",
+    "category": "convert",
+    "builtin": true,
+    "prompt": "参考这张动漫场景图，转换为古典油画风格，厚重笔触，色彩浓郁，光影有伦勃朗式的明暗对比，保留原图构图但增强绘画质感，画布纹理明显，艺术气息浓厚，人物双手轻叠在胸前，眼神明亮，元气生动。原比例。",
+    "tags": [
+      "二次元转油画",
+      "艺术",
+      "古典"
+    ]
+  },
+  {
+    "id": "cv-004",
+    "name": "二次元转赛博朋克",
+    "category": "convert",
+    "builtin": true,
+    "prompt": "参考这张人物图，转换为赛博朋克霓虹风格，画面充满紫色和青色的霓虹灯光，人物穿着未来感服装，背景是雨夜的高科技街道，建筑上有全息广告牌，光影对比强烈，氛围冷峻又迷幻，人物随意漫步，回眸浅笑，动感街拍姿势。原比例。",
+    "tags": [
+      "二次元转赛博",
+      "霓虹",
+      "未来"
+    ]
+  },
+  {
+    "id": "cv-005",
+    "name": "写实转吉卜力",
+    "category": "convert",
+    "builtin": true,
+    "prompt": "参考这张写实风景图，转换为吉卜力动画风格，色彩明亮清新，天空有大朵蓬松的白云，草地绿意盎然，画面充满治愈的童话氛围，保留原图的场景布局但加入手绘动画质感。原比例。",
+    "tags": [
+      "写实转动漫",
+      "吉卜力",
+      "治愈"
+    ]
+  },
+  {
+    "id": "cv-006",
+    "name": "写实转水彩",
+    "category": "convert",
+    "builtin": true,
+    "prompt": "参考这张照片，转换为清新水彩插画风格，色彩淡雅透明，水墨晕染边缘，纸张纹理可见，画面轻盈通透，保留人物或主体的形态但用柔和的色块表现，文艺清新。原比例。，人物侧身回眸，一只手轻抚飘起的发丝，温柔浅笑",
+    "tags": [
+      "写实转水彩",
+      "插画",
+      "清新"
+    ]
+  },
+  {
+    "id": "cv-007",
+    "name": "自拍转杂志大片",
+    "category": "convert",
+    "builtin": true,
+    "prompt": "参考这张自拍图，转换为高端时尚杂志大片风格，摄影棚专业打光，背景为纯色或渐变，人物姿势更从容大气，妆容精致，色彩高级有质感，画面锐利有电影感。原比例。",
+    "tags": [
+      "自拍转大片",
+      "时尚",
+      "棚拍"
+    ]
+  },
+  {
+    "id": "cv-008",
+    "name": "风景转国潮插画",
+    "category": "convert",
+    "builtin": true,
+    "prompt": "参考这张风景图，转换为国潮风格的插画，融入中国传统山水元素，红金配色，加入祥云、松树、远山等传统纹样，画面精致华丽，有很强的装饰性，古典又现代。原比例。",
+    "tags": [
+      "风景转国潮",
+      "传统",
+      "装饰"
+    ]
+  },
+  {
+    "id": "cv-009",
+    "name": "二次元转韩系写真",
+    "category": "convert",
+    "builtin": true,
+    "prompt": "参考这张二次元少女图，将其转换为韩系清新写真风格，人物皮肤通透白皙，韩式精致淡妆，温柔的侧光，背景是明亮的咖啡厅，她穿着简约奶油色针织衫，姿态自然松弛，画面干净柔和，真实肤质，生活感摄影。原比例。",
+    "tags": [
+      "二次元转韩系",
+      "写真",
+      "清新"
+    ]
+  },
+  {
+    "id": "cv-010",
+    "name": "二次元转街头潮拍",
+    "category": "convert",
+    "builtin": true,
+    "prompt": "参考这张动漫人物图，将其转换为都市街头潮拍风格，人物穿着时髦的oversize外套和阔腿裤，站在霓虹灯街角，眼神自信酷飒，背景是夜晚的城市街道，胶片颗粒感，电影感调色，真实肤质，随意漫步，回眸浅笑，动感街拍姿势。原比例。",
+    "tags": [
+      "二次元转街头",
+      "潮拍",
+      "都市"
+    ]
+  },
+  {
+    "id": "cv-011",
+    "name": "二次元转证件照",
+    "category": "convert",
+    "builtin": true,
+    "prompt": "参考这张二次元少女图，将其转换为精致的证件照风格，人物正面直视镜头，韩式通勤淡妆，黑色直发高颅顶，穿着深色西装白衬衫，蝴蝶光柔和打光，浅灰低饱和背景，半身构图，表情从容自信，五官自然真实，双手轻叠在胸前，眼神明亮，元气生动。原比例。",
+    "tags": [
+      "二次元转证件照",
+      "通勤",
+      "正式"
+    ]
+  },
+  {
+    "id": "cv-012",
+    "name": "写实转日系动漫",
+    "category": "convert",
+    "builtin": true,
+    "prompt": "参考这张写实人像图，将其转换为日系动漫插画风格，大眼睛，精致五官，线条干净，明亮清新的色彩，人物背景是樱花与蓝天，治愈系氛围，赛璐璐上色，动漫质感，回眸浅笑，一手伸向花瓣。原比例。",
+    "tags": [
+      "写实转动漫",
+      "日系",
+      "治愈"
+    ]
+  },
+  {
+    "id": "cv-013",
+    "name": "写实转科幻机甲",
+    "category": "convert",
+    "builtin": true,
+    "prompt": "参考这张人物图，将其转换为科幻机甲风格，人物穿着流线型未来装甲，带发光能量线条，霓虹光效，背景是高科技都市，冷色调，电影感光影，概念艺术风格，随意漫步，回眸浅笑，动感姿势。原比例。",
+    "tags": [
+      "写实转科幻",
+      "机甲",
+      "未来"
+    ]
+  },
+  {
+    "id": "cv-014",
+    "name": "写实转插画绘本",
+    "category": "convert",
+    "builtin": true,
+    "prompt": "参考这张照片，将其转换为温柔的手绘插画绘本风格，人物线条柔和，色彩淡雅，水彩晕染边缘，画面像绘本故事插图，温暖治愈，背景简化保留氛围，人物神态温暖。原比例。，人物轻轻侧身，一只手托着下巴，温柔凝视远方",
+    "tags": [
+      "写实转插画",
+      "绘本",
+      "治愈"
+    ]
+  },
+  {
+    "id": "cv-015",
+    "name": "自拍转电影剧照",
+    "category": "convert",
+    "builtin": true,
+    "prompt": "参考这张自拍图，将其转换为电影剧照风格，人物处于光影戏剧性的场景，冷暖对比色调，背景是城市夜景或室内暗光，构图像电影画面，人物神态有故事感，电影胶片质感。原比例。，她缓缓回头，一只手撩开发丝，眼神看向镜头",
+    "tags": [
+      "自拍转电影",
+      "剧照",
+      "故事"
+    ]
+  },
+  {
+    "id": "cv-016",
+    "name": "二次元转国潮古风",
+    "category": "convert",
+    "builtin": true,
+    "prompt": "参考这张动漫人物图，将其转换为国潮古风插画，人物是一位年轻可爱的少女，身着汉服俏皮灵动，融入祥云、山水、牡丹等传统元素，红金配色，古典又活泼，画面精致华丽，装饰性强，现代又传统，双手轻叠在胸前，眼神明亮，元气生动。原比例。",
+    "tags": [
+      "二次元转国潮",
+      "古风",
+      "华丽"
+    ]
+  },
+  {
+    "id": "cv-017",
+    "name": "二次元转油画",
+    "category": "convert",
+    "builtin": true,
+    "prompt": "参考这张二次元少女图，将其转换为古典油画风格，厚重笔触，浓郁色彩，伦勃朗式明暗对比，保留原构图但增强绘画质感，画布纹理明显，艺术气息浓厚，双手轻叠在胸前，眼神明亮，元气生动。原比例。",
+    "tags": [
+      "二次元转油画",
+      "艺术",
+      "古典"
+    ]
+  },
+  {
+    "id": "cv-018",
+    "name": "写实转像素",
+    "category": "convert",
+    "builtin": true,
+    "prompt": "参考这张人物图，将其转换为复古像素游戏风，人物和背景都用像素块表现，色彩鲜亮，有8-bit游戏画面的感觉，保留人物辨识度，怀旧趣味。原比例。，人物摆出俏皮的打斗姿势，举手投足带动感",
+    "tags": [
+      "写实转像素",
+      "复古",
+      "游戏"
+    ]
+  },
+  {
+    "id": "cv-019",
+    "name": "二次元转极简海报",
+    "category": "convert",
+    "builtin": true,
+    "prompt": "参考这张动漫人物图，将其转换为极简设计海报风格，人物轮廓几何化，大色块，负空间充足，现代瑞士设计风，双色调配色，画面高级简洁，有杂志封面感，轻抚发丝，仰头灿烂一笑，夏日轻快。原比例。",
+    "tags": [
+      "二次元转海报",
+      "极简",
+      "设计"
+    ]
+  },
+  {
+    "id": "cv-020",
+    "name": "写实转水彩淡雅",
+    "category": "convert",
+    "builtin": true,
+    "prompt": "参考这张写实人像图，将其转换为清新水彩插画风格，色彩淡雅透明，水墨晕染边缘，纸张纹理可见，画面轻盈通透，保留人物形体但用柔和色块表现，文艺清新，优雅放松的姿势，温柔微笑，一手轻触衣领。原比例。",
+    "tags": [
+      "写实转水彩",
+      "插画",
+      "淡雅"
+    ]
+  },
+  {
+    "id": "src-001",
+    "name": "演出散场自拍",
+    "category": "reality",
+    "builtin": true,
+    "source": "github",
+    "prompt": "超写实 iPhone 前置摄像头意外自拍。24 岁东亚女性，鹅蛋脸，五官自然清秀不是网红脸，健康自然肤色，深棕微乱中长发，气质真实松弛。场景是演唱会结束后的后台走廊，她边走边随手举起手机前置镜头，微微转身，脸上带着演出后放松疲惫但开心的微笑，头发凌乱，神态鲜活不做作。手臂伸展手机距离过近，前置镜头透视明显，构图轻微倾斜，人物未居中，头发手臂轻微动态模糊。低光噪点，舞台灯光轻微过曝，局部高光溢出，镜头光晕。竖向构图，避免过度美颜和塑料皮肤。",
+    "tags": [
+      "写实",
+      "自拍",
+      "演出"
+    ]
+  },
+  {
+    "id": "src-002",
+    "name": "午后与小动物",
+    "category": "reality",
+    "builtin": true,
+    "source": "github",
+    "prompt": "超写实生活感摄影。年轻亚洲女性在午后花园庭院里，与一只小猫温馨互动，她蹲下身轻抚猫咪，脸上是温柔自然的笑容，阳光透过树叶洒下斑驳光影，背景是绿植与木质栅栏，真实皮肤纹理，暖色调，生活感松弛不做作，手机或相机抓拍质感，镜头轻微虚化背景。竖向构图 3:4。",
+    "tags": [
+      "写实",
+      "生活",
+      "宠物"
+    ]
+  },
+  {
+    "id": "src-003",
+    "name": "窗边晨光",
+    "category": "reality",
+    "builtin": true,
+    "source": "github",
+    "prompt": "超写实晨间人像。年轻女性坐在窗边，清晨柔和的光线照在她脸上，她正在喝一杯咖啡，神情慵懒放松，头发微微凌乱，穿着舒适的居家毛衣，窗外是模糊的城市晨景，暖金色调，皮肤自然真实，氛围安静美好，生活质感。竖向构图。",
+    "tags": [
+      "写实",
+      "晨光",
+      "居家"
+    ]
+  },
+  {
+    "id": "src-004",
+    "name": "草莓野餐甜系",
+    "category": "reality",
+    "builtin": true,
+    "source": "github",
+    "prompt": "超写实甜美系人像。年轻女性在草坪上的野餐场景，穿着淡色连衣裙，周围有草莓、野餐篮和格子布，明媚阳光下她自然笑着，背景是草地和野花，画面色彩明亮清新，皮肤真实细腻，生活化充满少女感，抓拍质感。竖向构图 3:4。",
+    "tags": [
+      "写实",
+      "甜美",
+      "野餐"
+    ]
+  },
+  {
+    "id": "src-005",
+    "name": "芙宁娜 cosplay",
+    "category": "anime",
+    "builtin": true,
+    "source": "github",
+    "prompt": "芙宁娜 Furina cosplay，白色短发带浅蓝色挑染，小巧蓝黑色礼帽，枫丹蓝白贵族歌剧服，自信俏皮的戏剧化气质，室内漫展手机随手拍，9:16竖图，写实摄影风格，真人cosplay，普通观众视角，手持手机抓拍，背景有展位但轻微虚化，真实服装材质，布料纹理清晰，缝线刺绣金属扣宝石配件真实，非低俗端庄自然姿势，白色短发柔软微卷，蓝色系异色眼睛有水元素感，深蓝白贵族短外套金色纽扣，精致领结，水滴宝石装饰，整体精致不低俗，友好浅笑，一手整理装束，漫展生动自然。",
+    "tags": [
+      "二次元",
+      "cos",
+      "芙宁娜"
+    ]
+  },
+  {
+    "id": "src-006",
+    "name": "茜特菈莉 cosplay",
+    "category": "anime",
+    "builtin": true,
+    "source": "github",
+    "prompt": "茜特菈莉 Citlali cosplay，年轻可爱的少女coser，粉紫色长发，前侧长辫，纳塔萨满风格服饰，紫蓝渐变长裙，带一点俏皮可爱的气质，室内漫展手机随手拍，9:16竖图，写实摄影风格，手持手机抓拍，背景轻微虚化，真实布料纹理与部落纹样，缝合刺绣真实，非低俗端庄姿势，粉紫长直发波浪微卷，纳塔部落纹样配饰，紫蓝渐变长裙，甜美灵动，友好浅笑，一手整理装束，漫展生动自然。",
+    "tags": [
+      "二次元",
+      "cos",
+      "茜特菈莉"
+    ]
+  },
+  {
+    "id": "src-007",
+    "name": "多莉 cosplay",
+    "category": "anime",
+    "builtin": true,
+    "source": "github",
+    "prompt": "多莉 Dori cosplay，小个子成年coser，粉色卷发，方形小眼镜，紫金大商人帽，须弥商人风格，机灵爱财的可爱气质，室内漫展手机随手拍，9:16竖图，写实摄影风格，真人cosplay，手持手机抓拍，背景轻微虚化，真实服装布料纹理，金色暖色系眼睛，帽子有宝石和大蝴蝶结，白色泡泡袖黑金小马甲，紫色灯笼裤腰间大蝴蝶结，金币钱袋小灯壶道具，真实棉布丝绸刺绣皮革金属质感，可爱机灵不低俗不儿童化，友好浅笑，一手整理装束，漫展生动自然。",
+    "tags": [
+      "二次元",
+      "cos",
+      "多莉"
+    ]
+  },
+  {
+    "id": "src-008",
+    "name": "桃园仙气古风",
+    "category": "reality",
+    "builtin": true,
+    "source": "github",
+    "prompt": "竖版 2:3，高端写实自然光人像摄影，盛夏晴日上午的蟠桃果园，一位年轻可爱的少女站在挂满成熟粉红蟠桃的桃树枝下，近距离半身特写，人物正面看向镜头，头部微微偏向一侧，嘴角带俏皮甜美的笑容，眼神清澈灵动充满朝气，气质活泼治愈。她拥有黑棕色慵懒低盘发，额前与脸侧有被微风吹起的碎发，佩戴珍珠耳饰与一侧浅粉流苏发饰。穿低饱和蜜桃粉轻纱长裙，端庄交叠领口，完整内衬，露出自然肩颈和锁骨上方线条，外搭同色轻盈纱质披帛，材质纹理真实。85mm 浅景深聚焦面部，桃枝做前景框景，真实肤质，少女感十足。",
+    "tags": [
+      "古风",
+      "写实",
+      "仙气"
+    ]
+  },
+  {
+    "id": "src-009",
+    "name": "盛唐美人",
+    "category": "reality",
+    "builtin": true,
+    "source": "github",
+    "prompt": "竖版 2:3，写实自然光人像摄影，盛唐古典美人，一位年轻可爱的少女，身着唐制齐胸襦裙，细腻丝绸质感，浅粉与鹅黄配色，双环髻配步摇发饰，薄施脂粉，眉眼弯弯带俏皮笑意，站在牡丹花丛边，清晨柔光，背景花枝虚化，85mm 特写面部，真实肤质与妆容细节，活泼甜美气质，端庄又灵动，回眸浅笑，一手伸向花瓣。",
+    "tags": [
+      "古风",
+      "唐装",
+      "美人"
+    ]
+  },
+  {
+    "id": "src-010",
+    "name": "竹影东方美",
+    "category": "reality",
+    "builtin": true,
+    "source": "github",
+    "prompt": "竖版 2:3，写实人像摄影，东方古典气质美人，廊下竹林场景，青竹与石阶背景，人物身着素雅茶白长衫，广袖轻垂，发髻简约配玉簪，午后斜阳透过竹叶洒落斑驳光影，侧身回眸，眉目清冷疏离，真实肤质，电影感光影，宁静雅致氛围。",
+    "tags": [
+      "古风",
+      "竹影",
+      "素雅"
+    ]
+  },
+  {
+    "id": "src-011",
+    "name": "蓝橙梦光",
+    "category": "reality",
+    "builtin": true,
+    "source": "github",
+    "prompt": "竖版 2:3，写实人像摄影，蓝橙双色梦幻光影，约 24 岁东亚女性，侧脸特写，冷暖光线在面部交汇，一人身着浅色旗袍，背景是夜色园景与暖橙灯光，神秘又温柔，发丝微扬，眼神迷离，低饱和电影级调色，真实肤质，高级感氛围，优雅放松的姿势，温柔微笑，一手轻触衣领。",
+    "tags": [
+      "古风",
+      "光影",
+      "梦幻"
+    ]
+  },
+  {
+    "id": "src-012",
+    "name": "海马体证件照",
+    "category": "reality",
+    "builtin": true,
+    "source": "github",
+    "prompt": "海马体风格证件照，24 岁亚洲女生，韩式精英通勤妆，黑长直发高颅顶，深色西装白衬衫，蝴蝶光柔和打光，皮肤通透自然，浅灰低饱和度背景，半身构图上方留白，正面直视镜头，眼神光自然清亮，表情从容自信，五官自然清秀，面部干净，健康自然肤色，干净自然肤质，避免 AI 美女脸、网红感、过度精修、塑料皮肤、暗沉肤色，轻抚发丝，仰头灿烂一笑，夏日轻快。",
+    "tags": [
+      "写实",
+      "证件照",
+      "通勤"
+    ]
+  },
+  {
+    "id": "src-013",
+    "name": "女友感自拍",
+    "category": "reality",
+    "builtin": true,
+    "source": "github",
+    "prompt": "超写实 iPhone 前置摄像头自拍特写。24 岁东亚女性，鹅蛋脸，五官自然清秀非网红脸，健康自然肤色，深棕微乱中长发，神情带着自然开心的微笑，眼神鲜活有光。手机距脸很近，构图微倾，头发轻微动态感，前置镜头轻微畸变。低光噪点，混合灯光环境，局部高光，镜头眩光，整体手机自拍质感，无专业相机感。背景完全虚化，隐约透出环境灯光和人群虚影。竖向构图 3:4，人物居画面上半区。避免 AI 美女脸、过度美颜、塑料皮肤。",
+    "tags": [
+      "写实",
+      "自拍",
+      "女友感"
+    ]
+  },
+  {
+    "id": "src-014",
+    "name": "韩系氛围写真",
+    "category": "reality",
+    "builtin": true,
+    "source": "github",
+    "prompt": "韩系摄影风格人像，竖版 3:4，约 24 岁东亚女生，柔和的自然光，低饱和度莫兰迪色调，人物穿着简约奶油色针织外套，站在咖啡店玻璃窗前，侧脸看向窗外，眼神安静，背景虚化光斑，妆容清淡，肤质通透，生活感氛围胶片颗粒，整体温柔文艺，一手轻托脸颊，温柔微笑，手边一杯咖啡。",
+    "tags": [
+      "写实",
+      "韩系",
+      "文艺"
+    ]
+  },
+  {
+    "id": "src-015",
+    "name": "都市夜色人像",
+    "category": "reality",
+    "builtin": true,
+    "source": "github",
+    "prompt": "竖版 2:3，都市夜景人像摄影，约 25 岁东亚女性，站在霓虹灯下的城市街道，暖黄路灯与蓝紫霓虹混合打光，人物穿着时尚风衣，回眸看向镜头，发丝被风轻微吹动，背景车流光轨虚化，肤质真实，电影感调色，冷艳又迷人。",
+    "tags": [
+      "写实",
+      "都市",
+      "夜景"
+    ]
+  },
+  {
+    "id": "src-016",
+    "name": "清新少女咖啡厅",
+    "category": "reality",
+    "builtin": true,
+    "source": "github",
+    "prompt": "竖版 3:4，写实人像摄影，一位甜美亲切的年轻可爱少女，温暖微笑的眼睛，甜美灿烂的笑容，穿着奶油色针织衫，坐姿一手轻托脸颊，半身肖像，85mm 镜头，柔和自然窗光，温馨现代咖啡厅背景，温暖粉彩色调，韩系生活摄影，真实肤质浅景深，自然背景虚化，真实色调过渡与精准色彩还原，自然光摄影，真实肤质，高清细节。",
+    "tags": [
+      "写实",
+      "清新",
+      "咖啡厅"
+    ]
+  },
+  {
+    "id": "src-017",
+    "name": "都会知性写真",
+    "category": "reality",
+    "builtin": true,
+    "source": "github",
+    "prompt": "竖版 2:3，写实人像摄影，一位年轻可爱的亚洲少女，柔和可爱的鹅蛋脸，专注明亮的眼神，穿着白衬衫配高腰裙，可爱的站姿，半身肖像，85mm 镜头，电影感侧光控制对比，现代城市街道背景，青橙电影调色，电影剧照人像摄影，真实肤质自然背景虚化，真实色调过渡，青春甜美感，电影感色调，真实肤质纹理。",
+    "tags": [
+      "写实",
+      "都市",
+      "知性"
+    ]
+  },
+  {
+    "id": "src-018",
+    "name": "日系清新写真",
+    "category": "reality",
+    "builtin": true,
+    "source": "github",
+    "prompt": "竖版 3:4，写实人像摄影，一位年轻可爱的甜美少女，清澈的眼神温柔凝视，自然的微笑，穿着白衬衫配高腰裙，坐在咖啡桌旁，半身肖像，85mm 镜头，柔和自然窗光，极简中性棚拍背景，日系胶片色调，日系自然光人像摄影，真实肤质浅景深，自然背景虚化，日系底片质感，自然光摄影。",
+    "tags": [
+      "写实",
+      "日系",
+      "清新"
+    ]
+  },
+  {
+    "id": "src-019",
+    "name": "时尚杂志大片",
+    "category": "reality",
+    "builtin": true,
+    "source": "github",
+    "prompt": "竖版 2:3，写实人像摄影，一位年轻可爱的甜美少女，柔和可爱的面部轮廓，灿烂的眼神，穿着精致蕾丝吊带裙，手轻握咖啡杯，面部特写肖像，85mm 镜头，柔和背光带边缘光，极简中性棚拍背景，干净中性色调，时尚杂志摄影，真实肤质与精致布料纹理，自然背景虚化，真实色调过渡，元气少女质感。",
+    "tags": [
+      "写实",
+      "时尚",
+      "杂志"
+    ]
+  },
+  {
+    "id": "src-020",
+    "name": "暖光居家日常",
+    "category": "reality",
+    "builtin": true,
+    "source": "github",
+    "prompt": "竖版 3:4，写实人像摄影，一位年轻可爱的甜美少女，温暖微笑的眼睛，自然温柔的笑容，穿着奶油色针织衫，坐姿一手轻托脸颊，半身肖像，85mm 镜头，柔和自然窗光，安静阳光的家居内景，温暖粉彩色调，日系自然光人像摄影，真实肤质浅景深，自然背景虚化，真实色调过渡，温馨日常感，真实肤质，暖光。",
+    "tags": [
+      "写实",
+      "居家",
+      "暖光"
+    ]
+  },
+  {
+    "id": "src-021",
+    "name": "电影剧照人像",
+    "category": "reality",
+    "builtin": true,
+    "source": "github",
+    "prompt": "竖版 2:3，写实人像摄影，一位年轻可爱的甜美少女，清澈明亮的眼神温柔凝视，灿烂的表情，穿着白衬衫配高腰裙，可爱放松的姿势，面部特写肖像，35mm 环境人像镜头，电影感侧光，城市街道背景，青橙电影调色，电影剧照人像摄影，真实肤质自然背景虚化，真实色调过渡，甜美女主氛围，电影感光影。",
+    "tags": [
+      "写实",
+      "电影",
+      "剧照"
+    ]
+  },
+  {
+    "id": "src-022",
+    "name": "韩系甜系少女",
+    "category": "reality",
+    "builtin": true,
+    "source": "github",
+    "prompt": "竖版 3:4，写实人像摄影，一位甜美开朗的可爱韩系少女，温暖微笑的眼睛，甜美灿烂的笑容，穿着奶油色针织衫，坐姿一手轻托脸颊，半身肖像，85mm 镜头，柔和自然窗光，温馨现代咖啡厅背景，温暖粉彩色调，韩系生活摄影，真实肤质浅景深，自然背景虚化，甜美自然，韩系风格。",
+    "tags": [
+      "写实",
+      "韩系",
+      "甜系"
+    ]
+  },
+  {
+    "id": "src-023",
+    "name": "成熟优雅人像",
+    "category": "reality",
+    "builtin": true,
+    "source": "github",
+    "prompt": "竖版 2:3，写实人像摄影，cute young Asian girl in her 20s，cute oval face with soft contours，sweet gentle smile，wearing a delicate lace spaghetti-strap dress，cute relaxed pose，full-body environmental portrait，105mm portrait lens with flattering compression，warm golden-hour sunlight，lush urban park with softly blurred greenery，muted Japanese film tones，editorial fashion magazine photography，natural skin texture, smooth natural background bokeh，realistic tonal transitions，可爱自然，真实肤质，青春活力。",
+    "tags": [
+      "写实",
+      "优雅",
+      "成熟"
+    ]
+  },
+  {
+    "id": "src-024",
+    "name": "甜系少女咖啡",
+    "category": "reality",
+    "builtin": true,
+    "source": "github",
+    "prompt": "竖版 3:4，写实人像摄影，sweet and approachable Asian woman in her 20s，petite refined face with delicate balanced contours，sweet radiant smile with bright expressive eyes，wearing an off-shoulder pink top with a coordinated short skirt，seated pose with one hand resting gently on her cheek，half-body portrait，85mm portrait lens，soft natural window light，cozy modern cafe background，warm pastel tones，Korean lifestyle photography，natural skin texture, shallow depth of field，smooth natural background bokeh，realistic tonal transitions，甜系少女，咖啡厅暖光，真实肤质。",
+    "tags": [
+      "写实",
+      "甜系",
+      "少女"
+    ]
+  },
+  {
+    "id": "src-025",
+    "name": "街头滑板金时刻",
+    "category": "reality",
+    "builtin": true,
+    "source": "github",
+    "prompt": "竖版 2:3，城市街头纪实电影摄影，傍晚金色时刻的宽阔十字路口，一位 24 岁成年东亚女生站在斑马线中央偏下位置，黑色低盘发，五官自然清秀，面部干净，健康自然肤色，穿宽松黑色西装外套、白衬衫、黑色长裤与黑色皮鞋，脚下踩一块普通滑板，双手自然插袋，平静直视镜头，人物本人清晰锐利、姿态稳定。四周是大量匆匆穿行的上班族与行人，全部形成明显运动模糊与拖影，前景和边缘路人半遮挡掠过，营造整座城市都在赶路、只有她保持自己节奏的氛围。高机位轻俯拍构图，白色斑马线形成强烈几何引导线，背景是深灰路面与模糊人潮。整体色调为琥珀金、低饱和灰蓝，电影感胶片颗粒，真实肤质。",
+    "tags": [
+      "写实",
+      "街头",
+      "电影感"
+    ]
+  },
+  {
+    "id": "src-026",
+    "name": "深夜闪光灯抓拍",
+    "category": "reality",
+    "builtin": true,
+    "source": "github",
+    "prompt": "竖版 2:3，夜间闪光灯抓拍质感，深夜街头的随手抓拍，一位约 24 岁东亚女性，强闪光灯直打，重度运动模糊，人物处于将要走出画面的那一瞬间，面部带自然情绪，衣着日常休闲，背景是深夜城市街道与虚化灯光，整体像私人相册里被偶然拍下的照片，真实粗糙质感，胶片颗粒，低光噪点，电影感，随意漫步，回眸浅笑，动感街拍姿势。",
+    "tags": [
+      "写实",
+      "夜景",
+      "闪光灯"
+    ]
+  },
+  {
+    "id": "src-027",
+    "name": "夏日胶片写真",
+    "category": "reality",
+    "builtin": true,
+    "source": "github",
+    "prompt": "竖版 3:4，夏日胶片感写真，午后露天茶饮店门口，一位约 24 岁东亚女生，穿着简约夏日连衣裙，端着一杯冷饮，侧身等待，随意感十足，下午两三点的侧面自然光，画面偏暖，胶片颗粒明显，色彩浓郁但真实，肤质透亮，生活感抓拍，轻抚发丝，仰头灿烂一笑，夏日轻快。",
+    "tags": [
+      "写实",
+      "胶片",
+      "夏日"
+    ]
+  },
+  {
+    "id": "src-028",
+    "name": "晨光窗边女友",
+    "category": "reality",
+    "builtin": true,
+    "source": "github",
+    "prompt": "竖版 3:4，晨光人像摄影，清晨的窗边，一位约 23 岁东亚女生，趴在窗台边，半睡半醒慵懒状态，晨光洒在侧脸，暖金色调，穿着舒适的居家睡衣，发丝微乱，眼神迷离温柔，背景是室内虚化，真实肤质，生活感氛围，自然光摄影，趴在窗边，双肘撑窗台，温柔浅笑，头微微歪斜。",
+    "tags": [
+      "写实",
+      "晨光",
+      "慵懒"
+    ]
+  },
+  {
+    "id": "src-029",
+    "name": "花园抱猫写真",
+    "category": "reality",
+    "builtin": true,
+    "source": "github",
+    "prompt": "竖版 3:4，写实人像摄影，夏日花园庭院，一位约 24 岁东亚女生蹲下身温柔抱着一只猫，她轻抚猫咪，脸上是自然温柔的笑容，阳光透过树叶洒下斑驳光影，背景是绿植和木栅栏虚化，真实皮肤纹理，暖色调，生活感松弛，自然光抓拍，竖向构图。",
+    "tags": [
+      "写实",
+      "花园",
+      "宠物"
+    ]
+  },
+  {
+    "id": "src-030",
+    "name": "奶油光感居家",
+    "category": "reality",
+    "builtin": true,
+    "source": "github",
+    "prompt": "竖版 3:4，写实人像摄影，奶油光感居家写真，室内柔和自然光，一位约 24 岁东亚女生坐在地毯上，穿着奶油色针织开衫，手捧一杯热茶，神情安静放松，背景是简约家居，暖白奶油色调，肤质通透细腻，生活气息，真实细节，优雅放松的姿势，温柔微笑，一手轻触衣领。",
+    "tags": [
+      "写实",
+      "居家",
+      "奶油光"
+    ]
+  },
+  {
+    "id": "src-031",
+    "name": "城市漫游写真",
+    "category": "reality",
+    "builtin": true,
+    "source": "github",
+    "prompt": "竖版 2:3，写实人像摄影，城市街道漫游，一位约 25 岁东亚女生走在晴日都市街区，穿着简约白衬衫，回眸一笑，背景是干净的建筑与明亮的天空，自然光，通透色彩，生活感抓拍，真实肤质，文艺清新。",
+    "tags": [
+      "写实",
+      "城市",
+      "漫游"
+    ]
+  },
+  {
+    "id": "src-032",
+    "name": "新中式清透",
+    "category": "reality",
+    "builtin": true,
+    "source": "github",
+    "prompt": "竖版 2:3，写实人像摄影，新中式清透风格，一位约 24 岁东亚女生身着素色改良旗袍，站在中式庭院窗边，清透自然光，素雅配色，发髻简约，佩戴玉饰，神情温婉，背景是白墙黛瓦虚化，真实肤质，清雅高级感，站在窗边，双肘撑窗台，温柔浅笑，头微微歪斜。",
+    "tags": [
+      "写实",
+      "新中式",
+      "清透"
+    ]
+  },
+  {
+    "id": "src-033",
+    "name": "二次元灵动少女",
+    "category": "anime",
+    "builtin": true,
+    "source": "github",
+    "prompt": "动漫风格少女，灵动的大眼睛，长发飘飘，水手服校服，元气满满的笑容，背景是晴朗校园操场，白云蓝天，明亮清新的色彩，赛璐璐上色，干净线条，动感构图，治愈系动漫风，高细节。",
+    "tags": [
+      "二次元",
+      "少女",
+      "校园"
+    ]
+  },
+  {
+    "id": "src-034",
+    "name": "二次元长发御姐",
+    "category": "anime",
+    "builtin": true,
+    "source": "github",
+    "prompt": "动漫风格年轻可爱少女，黑色长发波浪微卷，大而水灵的眼睛，一袭柔美浅色连衣裙，背景是温暖咖啡厅或街角，暖黄灯光，甜美清新的氛围，细腻的光影，精致五官，高细节插画，元气可爱气场，一手轻托脸颊，温柔微笑，手边一杯咖啡。",
+    "tags": [
+      "二次元",
+      "御姐",
+      "冷艳"
+    ]
+  },
+  {
+    "id": "src-035",
+    "name": "二次元和风少女",
+    "category": "anime",
+    "builtin": true,
+    "source": "github",
+    "prompt": "动漫风格和风少女，黑色长发，身穿精致和服，樱花背景，温婉浅笑，手持团扇，细腻的和服纹样，柔和色调，樱花飘落，治愈唯美的氛围，日系动漫高质量插画，高细节，回眸浅笑，一手伸向花瓣。",
+    "tags": [
+      "二次元",
+      "和风",
+      "温婉"
+    ]
+  },
+  {
+    "id": "src-036",
+    "name": "二次元银发少女",
+    "category": "anime",
+    "builtin": true,
+    "source": "github",
+    "prompt": "动漫风格银发少女，银色长发，蓝色眼睛，精致面容，穿白色连衣裙，背景是星空或魔法森林，梦幻光影，神秘气质，细腻的光泽感和透视，高细节插画，奇幻唯美风格，双手轻叠在胸前，眼神明亮，元气生动。",
+    "tags": [
+      "二次元",
+      "银发",
+      "奇幻"
+    ]
+  },
+  {
+    "id": "src-037",
+    "name": "韩系清新",
+    "category": "reality",
+    "builtin": true,
+    "source": "github",
+    "prompt": "adult Korean woman with a polished and graceful presence，oval face with soft facial contours，long hair with light airy bangs framing the face，sweet radiant smile with bright expressive eyes，wearing a polished Korean cafe outfit with a fitted top and flowing skirt，seated cafe pose beside a small table，half-body portrait，85mm portrait lens，soft natural window light，cozy modern cafe background，warm pastel tones，Korean lifestyle photography，natural skin texture, shallow depth of field",
+    "tags": [
+      "韩系",
+      "清新",
+      "咖啡"
+    ]
+  },
+  {
+    "id": "src-038",
+    "name": "日系自然",
+    "category": "reality",
+    "builtin": true,
+    "source": "github",
+    "prompt": "adult Japanese woman with an understated natural presence，natural no-makeup makeup with softly defined features，long hair worn loose over the shoulders，calm relaxed expression with natural ease，wearing a light floral mini dress with a softly fitted silhouette，captured mid-step in a light relaxed stroll，three-quarter length portrait，50mm standard lens with natural perspective，soft diffused ambient light，quiet sunlit home interior，muted Japanese film tones，Japanese natural-light portrait photography，subtle organic film grain and realistic texture，elegant relaxed pose, soft smile, hand gently touching her collar",
+    "tags": [
+      "日系",
+      "自然",
+      "居家"
+    ]
+  },
+  {
+    "id": "src-039",
+    "name": "电影感",
+    "category": "reality",
+    "builtin": true,
+    "source": "github",
+    "prompt": "cute young Asian girl in her 20s，soft cute jawline with balanced facial proportions，long hair styled in soft loose curls，bright lively gaze，wearing a fitted pastel mini dress with clean minimal lines，body slightly turned while looking softly toward the camera，three-quarter length portrait，105mm portrait lens with flattering compression，cinematic side lighting with controlled contrast，evening city lights in the background，subtle cinematic teal and amber color grading，cinematic film-still portrait photography，delicate highlight rolloff and detailed shadow gradation，少女感电影风，优雅放松的姿势，温柔微笑，一手轻触衣领。",
+    "tags": [
+      "电影",
+      "光影",
+      "冷艳"
+    ]
+  },
+  {
+    "id": "src-040",
+    "name": "时尚杂志",
+    "category": "reality",
+    "builtin": true,
+    "source": "github",
+    "prompt": "cute young Asian girl in her 20s，soft cute cheekbones with delicate facial contours，low bun with soft face-framing strands，bright cheerful expression，wearing a delicate lace spaghetti-strap dress，seated on a chair while looking naturally toward the camera，half-body portrait，135mm telephoto lens with strong background compression，large studio softbox lighting with smooth falloff，minimal neutral studio backdrop，clean neutral color palette，editorial fashion magazine photography，high-resolution photographic detail without oversharpening，元气杂志大片。",
+    "tags": [
+      "时尚",
+      "杂志",
+      "大片"
+    ]
+  },
+  {
+    "id": "src-041",
+    "name": "都市人像",
+    "category": "reality",
+    "builtin": true,
+    "source": "github",
+    "prompt": "cute young Asian girl in her 20s，soft cute facial features with harmonious proportions，long shiny hair with soft volume，sparkling attentive gaze directed toward the camera，wearing a crisp white blouse with a high-waisted skirt，standing with both hands relaxed naturally at her sides，wide environmental portrait with contextual surroundings，35mm lens for an environmental portrait，even overcast daylight，contemporary city street background，cool contemporary urban tones，contemporary urban street portrait photography，smooth natural background bokeh，清甜都市感。",
+    "tags": [
+      "都市",
+      "职业",
+      "人像"
+    ]
+  },
+  {
+    "id": "src-042",
+    "name": "知性优雅",
+    "category": "reality",
+    "builtin": true,
+    "source": "github",
+    "prompt": "cute young Asian girl in her 20s，petite cute face with delicate balanced contours，side ponytail with a delicate ribbon，soft sweet smile，wearing a tailored cute blouse with a feminine silhouette，standing with both hands held loosely behind her back，head-and-shoulders portrait framing，85mm portrait lens，soft backlight with gentle edge glow，refined contemporary office interior，true-to-life warm skin tones with restrained color grading，polished professional branding portrait，crisp eye detail with natural catchlights，可爱知性。",
+    "tags": [
+      "知性",
+      "优雅",
+      "职业"
+    ]
+  },
+  {
+    "id": "src-043",
+    "name": "元气写真",
+    "category": "reality",
+    "builtin": true,
+    "source": "github",
+    "prompt": "竖版 3:4，写实人像摄影，一位元气满满的年轻可爱女孩，鹅蛋脸，大眼睛炯炯有神，灿烂的阳光笑容，穿着白色连衣裙，背景是蓝天白云的户外草地，自然明亮光，清新色调，真实肤质，朝气蓬勃，抓拍感。",
+    "tags": [
+      "可爱",
+      "元气",
+      "户外"
+    ]
+  },
+  {
+    "id": "src-044",
+    "name": "奶甜居家",
+    "category": "reality",
+    "builtin": true,
+    "source": "github",
+    "prompt": "竖版 3:4，写实人像摄影，一位奶甜少女，居家环境，穿着奶油色针织开衫，坐在沙发地毯上，手捧热牛奶，甜甜的笑容，暖白奶油光，背景简约温馨，肤质通透，少女感十足，生活气息。",
+    "tags": [
+      "可爱",
+      "居家",
+      "奶甜"
+    ]
+  },
+  {
+    "id": "src-045",
+    "name": "元气校园",
+    "category": "reality",
+    "builtin": true,
+    "source": "github",
+    "prompt": "竖版 3:4，写实人像摄影，一位活泼的年轻可爱女学生，穿着水手校服，双马尾，背着书包走在阳光校园，回眸灿烂一笑，背景是教学楼和绿树，明亮自然光，青春朝气，真实肤质，校园写真感。",
+    "tags": [
+      "可爱",
+      "校园",
+      "元气"
+    ]
+  },
+  {
+    "id": "src-046",
+    "name": "甜美下午茶",
+    "category": "reality",
+    "builtin": true,
+    "source": "github",
+    "prompt": "竖版 3:4，写实人像摄影，一位甜美可爱的少女，坐在精致下午茶餐桌前，手捧蛋糕，甜甜微笑，背景是欧式咖啡馆，马卡龙暖色光，柔美色调，真实肤质，少女心，温馨精致。",
+    "tags": [
+      "可爱",
+      "下午茶",
+      "甜美"
+    ]
+  },
+  {
+    "id": "src-047",
+    "name": "清新夏日泳池",
+    "category": "reality",
+    "builtin": true,
+    "source": "github",
+    "prompt": "竖版 3:4，写实人像摄影，一位清新可爱的泳装少女，站在清澈泳池边，短发微湿，灿烂笑容，夏日明媚阳光，蓝色水面波光，清新色调，真实肤质，青春活力，凉爽夏日感。",
+    "tags": [
+      "可爱",
+      "夏日",
+      "清爽"
+    ]
+  },
+  {
+    "id": "src-048",
+    "name": "软萌居家慵懒",
+    "category": "reality",
+    "builtin": true,
+    "source": "github",
+    "prompt": "竖版 3:4，写实人像摄影，一位软萌少女，蜷在沙发上，穿着宽松居家服，抱着抱枕，慵懒甜笑，暖黄灯光，温馨家居背景，肤质柔和，软萌可爱，生活感，优雅放松的姿势，温柔微笑，一手轻触衣领。",
+    "tags": [
+      "可爱",
+      "软萌",
+      "慵懒"
+    ]
+  },
+  {
+    "id": "src-049",
+    "name": "甜美游乐园",
+    "category": "reality",
+    "builtin": true,
+    "source": "github",
+    "prompt": "竖版 3:4，写实人像摄影，一位甜美可爱的女孩，在游乐园里，穿着彩色连衣裙，手里拿着冰淇淋，开心灿烂笑，背景是旋转木马和气球，明亮鲜艳色调，真实肤质，少女心爆棚，欢乐氛围，优雅放松的姿势，温柔微笑，一手轻触衣领。",
+    "tags": [
+      "可爱",
+      "游乐园",
+      "甜美"
+    ]
+  },
+  {
+    "id": "src-050",
+    "name": "元气运动少女",
+    "category": "reality",
+    "builtin": true,
+    "source": "github",
+    "prompt": "竖版 3:4，写实人像摄影，一位元气十足的运动少女，穿着活力运动装，扎着高马尾，站在操场/球场上，额头微汗，自信灿烂笑，明亮自然光，青春活力，真实肤质，运动写真，优雅放松的姿势，温柔微笑，一手轻触衣领。",
+    "tags": [
+      "可爱",
+      "运动",
+      "元气"
+    ]
+  },
+  {
+    "id": "src-051",
+    "name": "元气动漫少女",
+    "category": "anime",
+    "builtin": true,
+    "source": "github",
+    "prompt": "动漫风格元气少女，橙色短发，大而闪亮的眼睛，灿烂阳光的笑容，穿着运动水手服，背景是晴朗校园操场，蓝天白云，明亮清新色彩，赛璐璐上色，干净线条，元气满满，高细节。",
+    "tags": [
+      "二次元",
+      "元气",
+      "校园"
+    ]
+  },
+  {
+    "id": "src-052",
+    "name": "软萌萝莉羊",
+    "category": "anime",
+    "builtin": true,
+    "source": "github",
+    "prompt": "可爱的动漫萝莉，奶金色双马尾，大眼睛，粉嫩脸颊，穿着绵羊角连帽睡衣，抱着一只小羊玩偶，背景是粉色云朵，软萌可爱，治愈系，细腻画风，高细节，少女心，双手轻叠在胸前，眼神明亮，元气生动。",
+    "tags": [
+      "二次元",
+      "萝莉",
+      "软萌"
+    ]
+  },
+  {
+    "id": "src-053",
+    "name": "甜美兔耳少女",
+    "category": "anime",
+    "builtin": true,
+    "source": "github",
+    "prompt": "动漫风格甜美少女，戴白色兔耳，粉色长发，大眼汪汪，穿着蕾丝蓬蓬裙，捧着草莓蛋糕，背景是粉色草莓主题，甜蜜氛围，少女心，细腻光影，高细节插画，梦幻可爱，双手轻叠在胸前，眼神明亮，元气生动。",
+    "tags": [
+      "二次元",
+      "兔耳",
+      "甜美"
+    ]
+  },
+  {
+    "id": "src-054",
+    "name": "元气魔法少女",
+    "category": "anime",
+    "builtin": true,
+    "source": "github",
+    "prompt": "动漫风格魔法少女，双马尾粉发，大而有神的眼睛，穿着魔法少女战斗服，手持魔法杖，背景是星光魔法天空，梦幻光效，元气又奇幻，细腻画风，高细节，积极可爱，双手轻叠在胸前，眼神明亮，元气生动。",
+    "tags": [
+      "二次元",
+      "魔法少女",
+      "元气"
+    ]
+  },
+  {
+    "id": "src-055",
+    "name": "猫系少女",
+    "category": "reality",
+    "builtin": true,
+    "source": "github",
+    "prompt": "竖版 3:4，写实人像摄影，一位猫系可爱少女，圆脸大眼，慵懒眼神，抱着小猫，歪头浅笑，背景是温馨猫咪咖啡馆，暖光，软糯气质，真实肤质，少女感，治愈，一手轻托脸颊，温柔微笑，手边一杯咖啡。",
+    "tags": [
+      "可爱",
+      "猫系",
+      "治愈"
+    ]
+  },
+  {
+    "id": "src-056",
+    "name": "樱花和服",
+    "category": "reality",
+    "builtin": true,
+    "source": "github",
+    "prompt": "竖版 3:4，写实人像摄影，一位可爱少女穿日式和服，站樱花树下，粉色花瓣飘落，灿烂甜笑，背景是飞舞樱花，柔美光影，和风清新，真实肤质，少女浪漫，回眸浅笑，一手伸向花瓣。",
+    "tags": [
+      "可爱",
+      "和风",
+      "樱花"
+    ]
+  },
+  {
+    "id": "src-057",
+    "name": "海边白裙",
+    "category": "reality",
+    "builtin": true,
+    "source": "github",
+    "prompt": "竖版 3:4，写实人像摄影，一位可爱少女穿白色连衣裙，站在海边沙滩，海风吹拂长发，回眸甜笑，背景是蔚蓝大海和蓝天，清新色调，真实肤质，青春无敌，海风轻盈。",
+    "tags": [
+      "可爱",
+      "海边",
+      "清新"
+    ]
+  },
+  {
+    "id": "src-058",
+    "name": "甜系写真",
+    "category": "reality",
+    "builtin": true,
+    "source": "github",
+    "prompt": "竖版 3:4，写实人像摄影，一位甜系可爱少女，双马尾，粉色系穿搭，抱着草莓玩具，甜甜的笑容，背景是马卡龙粉色棚拍，柔美光，甜度爆表，真实肤质，少女心。",
+    "tags": [
+      "可爱",
+      "甜系",
+      "棚拍"
+    ]
+  },
+  {
+    "id": "src-059",
+    "name": "元气滑板",
+    "category": "reality",
+    "builtin": true,
+    "source": "github",
+    "prompt": "竖版 3:4，写实人像摄影，一位元气少女踩着滑板，戴棒球帽，运动风穿搭，自由滑行中灿烂笑，背景是城市街头，明亮自然光，青春活力，真实肤质，街头元气感，随意漫步，回眸浅笑，动感街拍姿势。",
+    "tags": [
+      "可爱",
+      "滑板",
+      "街头"
+    ]
+  },
+  {
+    "id": "src-060",
+    "name": "软萌汉服",
+    "category": "reality",
+    "builtin": true,
+    "source": "github",
+    "prompt": "竖版 3:4，写实人像摄影，一位软萌可爱少女穿浅色汉服，站在古风庭院，手持团扇，俏皮眨眼，背景是假山流水和花木，柔美古风光，软萌气质，真实肤质，古典又可爱，回眸浅笑，一手伸向花瓣。",
+    "tags": [
+      "可爱",
+      "汉服",
+      "软萌"
+    ]
+  },
+  {
+    "id": "src-061",
+    "name": "钢琴少女",
+    "category": "reality",
+    "builtin": true,
+    "source": "github",
+    "prompt": "竖版 3:4，写实人像摄影，一位可爱少女坐在钢琴前，侧脸专注又带甜笑，背景是阳光洒落的琴房，暖光，文艺气质，指尖灵动，真实肤质，安静又美好，轻抚发丝，仰头灿烂一笑，夏日轻快。",
+    "tags": [
+      "可爱",
+      "钢琴",
+      "文艺"
+    ]
+  },
+  {
+    "id": "src-062",
+    "name": "粉发猫耳娘",
+    "category": "anime",
+    "builtin": true,
+    "source": "github",
+    "prompt": "动漫风格粉发猫耳少女，大而圆的眼睛，甜美的笑容，穿着猫娘女仆装，身后有猫尾巴，背景是温馨cafe，暖黄光，软萌可爱，细腻画风，高细节，治愈系。",
+    "tags": [
+      "二次元",
+      "猫耳",
+      "软萌"
+    ]
+  },
+  {
+    "id": "src-063",
+    "name": "水手服元气",
+    "category": "anime",
+    "builtin": true,
+    "source": "github",
+    "prompt": "动漫风格水手服少女，短发齐刘海，天真大眼，灿烂笑容，穿着蓝白水手服，背景是樱花校园，明朗色彩，青春元气，干净线条，高细节，活力满满。",
+    "tags": [
+      "二次元",
+      "水手服",
+      "元气"
+    ]
+  },
+  {
+    "id": "src-064",
+    "name": "纸片人转软萌",
+    "category": "convert",
+    "builtin": true,
+    "source": "github",
+    "prompt": "参考这张二次元少女图，将其转换为软萌可爱的真人风格，人物变成年轻可爱小圆脸少女，大眼睛水汪汪，软糯甜美气质，肤质通透，背景简单干净，整体甜度爆表，真实又可爱，双手轻叠在胸前，眼神明亮，元气生动。原比例。",
+    "tags": [
+      "转换",
+      "软萌",
+      "可爱"
+    ]
+  },
+  {
+    "id": "src-065",
+    "name": "双马尾日常",
+    "category": "reality",
+    "builtin": true,
+    "source": "github",
+    "prompt": "竖版 3:4，写实人像摄影，一位可爱少女扎双马尾，简约日常穿搭，站阳光窗边，甜美浅笑，背景是温馨居家，自然光，真实肤质，少女感，生活化，轻抚发丝，仰头灿烂一笑，夏日轻快。",
+    "tags": [
+      "可爱",
+      "双马尾",
+      "日常"
+    ]
+  },
+  {
+    "id": "src-066",
+    "name": "甜圈下午茶",
+    "category": "reality",
+    "builtin": true,
+    "source": "github",
+    "prompt": "竖版 3:4，写实人像摄影，一位可爱少女在甜品店，手捧甜甜圈，甜甜笑，背景是粉色甜品墙，柔美暖光，甜度满，真实肤质，少女心，一手轻托脸颊，温柔微笑，手边一杯咖啡。",
+    "tags": [
+      "可爱",
+      "甜品",
+      "甜美"
+    ]
+  },
+  {
+    "id": "src-067",
+    "name": "元气晨跑",
+    "category": "reality",
+    "builtin": true,
+    "source": "github",
+    "prompt": "竖版 3:4，写实人像摄影，一位元气少女晨跑中，运动装束，脸上洋溢活力笑容，背景是公园林荫道晨光，清新色调，真实肤质，朝气蓬勃。",
+    "tags": [
+      "可爱",
+      "运动",
+      "元气"
+    ]
+  },
+  {
+    "id": "src-068",
+    "name": "图书馆安静",
+    "category": "reality",
+    "builtin": true,
+    "source": "github",
+    "prompt": "竖版 3:4，写实人像摄影，一位可爱少女在图书馆，低头看书，专注又温柔，背景是书柜和暖黄灯光，安静文艺，真实肤质，温婉少女，优雅放松的姿势，温柔微笑，一手轻触衣领。",
+    "tags": [
+      "可爱",
+      "文艺",
+      "安静"
+    ]
+  },
+  {
+    "id": "src-069",
+    "name": "夏日西瓜",
+    "category": "reality",
+    "builtin": true,
+    "source": "github",
+    "prompt": "竖版 3:4，写实人像摄影，一位可爱少女捧西瓜，站在夏日庭院，开怀大笑，背景是绿荫和阳光，清凉色调，真实肤质，青春欢乐，轻抚发丝，仰头灿烂一笑，夏日轻快。",
+    "tags": [
+      "可爱",
+      "夏日",
+      "清新"
+    ]
+  },
+  {
+    "id": "src-070",
+    "name": "软萌睡衣",
+    "category": "reality",
+    "builtin": true,
+    "source": "github",
+    "prompt": "竖版 3:4，写实人像摄影，一位软萌少女穿卡通睡衣，抱着小熊，坐床上，迷蒙又甜的笑，背景是温馨卧室，柔光，软萌治愈，真实肤质，优雅放松的姿势，温柔微笑，一手轻触衣领。",
+    "tags": [
+      "可爱",
+      "软萌",
+      "居家"
+    ]
+  },
+  {
+    "id": "src-071",
+    "name": "天台晴天",
+    "category": "reality",
+    "builtin": true,
+    "source": "github",
+    "prompt": "竖版 3:4，写实人像摄影，一位可爱少女站在天台，清风拂发，灿烂笑，背景是蓝天和城市远景，明亮通透，真实肤质，元气又自由，优雅放松的姿势，温柔微笑，一手轻触衣领。",
+    "tags": [
+      "可爱",
+      "晴天",
+      "天台"
+    ]
+  },
+  {
+    "id": "src-072",
+    "name": "果园采摘",
+    "category": "reality",
+    "builtin": true,
+    "source": "github",
+    "prompt": "竖版 3:4，写实人像摄影，一位可爱少女在果园采摘草莓，回眸甜笑，背景是草莓大棚和绿叶，自然光，清新色调，真实肤质，田园少女。",
+    "tags": [
+      "可爱",
+      "田园",
+      "采摘"
+    ]
+  },
+  {
+    "id": "src-073",
+    "name": "雨天透明伞",
+    "category": "reality",
+    "builtin": true,
+    "source": "github",
+    "prompt": "竖版 3:4，写实人像摄影，一位可爱少女打透明伞，站雨天的街道，回头甜笑，背景是雨滴反光和霓虹，日系氛围，真实肤质，忧郁又可爱，随意漫步，回眸浅笑，动感街拍姿势。",
+    "tags": [
+      "可爱",
+      "雨天",
+      "日系"
+    ]
+  },
+  {
+    "id": "src-074",
+    "name": "气球街拍",
+    "category": "reality",
+    "builtin": true,
+    "source": "github",
+    "prompt": "竖版 3:4，城市街拍，一位可爱少女手持彩色气球，俏皮奔跑，背景是都市街景，明亮自然光，真实肤质，元气俏皮，青春感，随意漫步，回眸浅笑，动感街拍姿势。",
+    "tags": [
+      "可爱",
+      "街拍",
+      "气球"
+    ]
+  },
+  {
+    "id": "src-075",
+    "name": "居家煮食",
+    "category": "reality",
+    "builtin": true,
+    "source": "github",
+    "prompt": "竖版 3:4，写实人像摄影，一位可爱少女在厨房煮食，围裙，甜甜笑，背景是温馨厨房，暖黄光，生活感，真实肤质，居家可爱，优雅放松的姿势，温柔微笑，一手轻触衣领。",
+    "tags": [
+      "可爱",
+      "居家",
+      "生活"
+    ]
+  },
+  {
+    "id": "src-076",
+    "name": "阳光草地",
+    "category": "reality",
+    "builtin": true,
+    "source": "github",
+    "prompt": "竖版 3:4，写实人像摄影，一位可爱少女躺在草地，手挡阳光，眯眼笑，背景是蓝天白云绿草，明亮太阳光，清新透亮，真实肤质，青春明媚，轻抚发丝，仰头灿烂一笑，夏日轻快。",
+    "tags": [
+      "可爱",
+      "草地",
+      "阳光"
+    ]
+  },
+  {
+    "id": "src-077",
+    "name": "元气骑行",
+    "category": "reality",
+    "builtin": true,
+    "source": "github",
+    "prompt": "竖版 3:4，写实人像摄影，一位元气少女骑自行车，笑靥如花，背景是乡间小路和田野，明媚光，自由畅快，真实肤质，青春活力，回眸浅笑，一手伸向花瓣。",
+    "tags": [
+      "可爱",
+      "骑行",
+      "元气"
+    ]
+  },
+  {
+    "id": "src-078",
+    "name": "可爱水手帽",
+    "category": "reality",
+    "builtin": true,
+    "source": "github",
+    "prompt": "竖版 3:4，写实人像摄影，一位可爱少女戴水手帽，站海边栈道，海风吹拂，甜笑，背景是蔚蓝大海，清新色调，真实肤质，清爽夏日，轻抚发丝，仰头灿烂一笑，夏日轻快。",
+    "tags": [
+      "可爱",
+      "水手",
+      "清新"
+    ]
+  },
+  {
+    "id": "src-079",
+    "name": "居家梳发",
+    "category": "reality",
+    "builtin": true,
+    "source": "github",
+    "prompt": "竖版 3:4，写实人像摄影，一位可爱少女对镜梳发，温婉浅笑，背景是暖光卧室，自然光，柔美氛围，真实肤质，温婉又可爱，优雅放松的姿势，温柔微笑，一手轻触衣领。",
+    "tags": [
+      "可爱",
+      "居家",
+      "温婉"
+    ]
+  },
+  {
+    "id": "src-080",
+    "name": "甜系野餐",
+    "category": "reality",
+    "builtin": true,
+    "source": "github",
+    "prompt": "竖版 3:4，写实人像摄影，一位可爱少女在草坪野餐，格子布野餐篮，甜笑，背景是樱花和草地，粉嫩色调，真实肤质，少女甜蜜，回眸浅笑，一手伸向花瓣。",
+    "tags": [
+      "可爱",
+      "野餐",
+      "甜系"
+    ]
+  },
+  {
+    "id": "src-081",
+    "name": "元气棒球",
+    "category": "reality",
+    "builtin": true,
+    "source": "github",
+    "prompt": "竖版 3:4，写实人像摄影，一位元气少女穿棒球服，手持球棒，自信甜笑，背景是棒球场，明亮光，运动活力，真实肤质，元气女孩，优雅放松的姿势，温柔微笑，一手轻触衣领。",
+    "tags": [
+      "可爱",
+      "运动",
+      "棒球"
+    ]
+  },
+  {
+    "id": "src-082",
+    "name": "窗台猫咪",
+    "category": "reality",
+    "builtin": true,
+    "source": "github",
+    "prompt": "竖版 3:4，写实人像摄影，一位可爱少女窗台边，抱着橘猫，温柔浅笑，背景是午后暖光和盆栽，治愈暖光，真实肤质，温馨治愈，趴在窗边，双肘撑窗台，温柔浅笑，头微微歪斜。",
+    "tags": [
+      "可爱",
+      "猫咪",
+      "治愈"
+    ]
+  },
+  {
+    "id": "src-083",
+    "name": "双马尾制服",
+    "category": "anime",
+    "builtin": true,
+    "source": "github",
+    "prompt": "动漫风格双马尾少女，齐刘海，水灵大眼，穿蓝白制服，背景是樱花校园，明朗色彩，元气可爱，干净线条，高细节，青春，开朗微笑，举起一只手打招呼，元气校园姿势。",
+    "tags": [
+      "二次元",
+      "双马尾",
+      "制服"
+    ]
+  },
+  {
+    "id": "src-084",
+    "name": "粉发甜心",
+    "category": "anime",
+    "builtin": true,
+    "source": "github",
+    "prompt": "动漫风格粉发甜心少女，大眼汪汪，甜甜笑容，穿粉色蕾丝裙，背景是粉色花海，梦幻柔光，甜美可爱，高细节，少女心。",
+    "tags": [
+      "二次元",
+      "粉发",
+      "甜美"
+    ]
+  },
+  {
+    "id": "src-085",
+    "name": "紫发猫娘",
+    "category": "anime",
+    "builtin": true,
+    "source": "github",
+    "prompt": "动漫风格紫发猫娘，尖耳猫耳，琥珀大眼，穿女仆装带猫尾，背景是复古洋馆，暖黄光，软萌神秘，细腻画风，高细节，双手轻叠在胸前，眼神明亮，元气生动。",
+    "tags": [
+      "二次元",
+      "猫娘",
+      "软萌"
+    ]
+  },
+  {
+    "id": "src-086",
+    "name": "元气橄榄",
+    "category": "anime",
+    "builtin": true,
+    "source": "github",
+    "prompt": "动漫橄榄色短发少女，阳光灿烂笑，穿运动T恤，背景是蓝天操场，明亮色彩，元气满满，干净线条，高细节，积极，轻抚发丝，仰头灿烂一笑，夏日轻快。",
+    "tags": [
+      "二次元",
+      "橄榄",
+      "元气"
+    ]
+  },
+  {
+    "id": "src-087",
+    "name": "和风水手",
+    "category": "anime",
+    "builtin": true,
+    "source": "github",
+    "prompt": "动漫派和风少女，黑长发，水手服，站樱花树下，温婉浅笑，背景是神社和樱花，柔美色调，治愈，细腻画风，高细节，文静，开朗微笑，举起一只手打招呼，元气校园姿势。",
+    "tags": [
+      "二次元",
+      "和风",
+      "温婉"
+    ]
+  },
+  {
+    "id": "src-088",
+    "name": "星空魔法",
+    "category": "anime",
+    "builtin": true,
+    "source": "github",
+    "prompt": "动漫风格魔法少女，银长发，星空裙，手持星光法杖，背景是浩瀚星空，梦幻光效，神秘可爱，高细节，奇幻唯美，双手轻叠在胸前，眼神明亮，元气生动。",
+    "tags": [
+      "二次元",
+      "星空",
+      "魔法"
+    ]
+  },
+  {
+    "id": "src-089",
+    "name": "元气赛车娘",
+    "category": "anime",
+    "builtin": true,
+    "source": "github",
+    "prompt": "动漫风格赛车娘，双马尾，头盔，赛车服，自信笑容，背景是赛道和赛车，动感色彩，元气飒爽，高细节，活力。",
+    "tags": [
+      "二次元",
+      "赛车",
+      "元气"
+    ]
+  },
+  {
+    "id": "src-090",
+    "name": "软萌狐娘",
+    "category": "anime",
+    "builtin": true,
+    "source": "github",
+    "prompt": "动漫风格狐娘，橘色耳朵尾巴，圆眼，狐狸面具，穿日式和服，背景是红叶庭院，暖光，软萌神秘，细腻画风，高细节，治愈，回眸浅笑，一手伸向花瓣。",
+    "tags": [
+      "二次元",
+      "狐娘",
+      "软萌"
+    ]
+  },
+  {
+    "id": "src-091",
+    "name": "二次元转元气",
+    "category": "convert",
+    "builtin": true,
+    "source": "github",
+    "prompt": "参考这张二次元少女图，将其转换为元气可爱真人风格，人物变成充满活力的元气少女，大眼灿烂笑容，肤质透亮，背景明亮清新，元气满满，真实又可爱。原比例。",
+    "tags": [
+      "转换",
+      "元气",
+      "可爱"
+    ]
+  },
+  {
+    "id": "src-092",
+    "name": "二次元转软萌",
+    "category": "convert",
+    "builtin": true,
+    "source": "github",
+    "prompt": "参考这张动漫人物图，将其转换为软萌甜美的真人风格，人物变成小圆脸软萌少女，水汪汪大眼，奶甜气质，肤质柔和，背景温馨，甜度爆表，双手轻叠在胸前，眼神明亮，元气生动。原比例。",
+    "tags": [
+      "转换",
+      "软萌",
+      "甜"
+    ]
+  },
+  {
+    "id": "src-093",
+    "name": "自拍转甜美",
+    "category": "convert",
+    "builtin": true,
+    "source": "github",
+    "prompt": "参考这张自拍图，将其转换为甜美可爱风格，人物变成可爱少女，甜美感提升，肤质提亮，背景柔化，少女心爆棚，真实又甜美。原比例。，她微微侧身回眸，一只手轻托脸颊，甜笑看着镜头",
+    "tags": [
+      "转换",
+      "自拍",
+      "甜美"
+    ]
+  },
+  {
+    "id": "src-094",
+    "name": "写实转猫娘",
+    "category": "convert",
+    "builtin": true,
+    "source": "github",
+    "prompt": "参考这张写实人像图，将其转换为可爱猫娘动漫风格，人物变成猫耳软萌少女，大眼甜笑，猫尾，日系动漫质感，软萌治愈，双手轻叠在胸前，眼神明亮，元气生动。原比例。",
+    "tags": [
+      "转换",
+      "猫娘",
+      "二次元"
+    ]
+  },
+  {
+    "id": "xjt-001",
+    "name": "仰视慵懒倚椅",
+    "category": "convert",
+    "builtin": true,
+    "source": "local",
+    "prompt": "从脚向上拍的仰视效果，让人物坐着，采用近大远小的构图和超广角视觉，低角度拍摄，增强空间感视觉冲击力，人物整体姿态、服装及背景环境不变，呈现人物慵懒地靠在椅子上，椅子旁边有扶手，架着二郎腿，一只手借助扶手撑着脸，表情微笑，头部微微倾斜。3:4 比例。",
+    "tags": ["仰视", "倚椅", "构图"]
+  },
+  {
+    "id": "xjt-002",
+    "name": "蹲姿V字吐舌",
+    "category": "convert",
+    "builtin": true,
+    "source": "local",
+    "prompt": "人物呈蹲姿，双腿分开，双手在头部两侧比出 V 字手势，姿态较为活泼且具有张力。嘴巴张开，露出吐舌头的表情，增添了俏皮可爱的风格，与整体的风格有反差感，保持原画风，背景不变，显得灵动有趣。采用平视视角，镜头与人物处于同一水平高度，让观众与人物产生平等的视觉交流感，使人物形象更亲近真实。采用中心构图，人物位于画面正中央，突出主体。",
+    "tags": ["蹲姿", "V字", "构图"]
+  },
+  {
+    "id": "xjt-003",
+    "name": "腿子主体低角度",
+    "category": "convert",
+    "builtin": true,
+    "source": "local",
+    "prompt": "以人物腿子为主体让人物站着，采用近大远小的构图和广角视觉，从右往上低角度拍摄，突出脚在画面中的主体地位，增强空间和视觉冲击力，服装及背景环境不变，比例保持 3:4。",
+    "tags": ["腿部", "低角度", "构图"]
+  },
+  {
+    "id": "xjt-006",
+    "name": "床单双马尾OK手势",
+    "category": "convert",
+    "builtin": true,
+    "source": "local",
+    "prompt": "二次元风格真人少女，黑色双马尾配米白色丝带，穿白色短袖+黑灰格纹短裙，白色蕾丝吊带长筒袜，坐在灰色床单的床上，背景是百叶窗，手比 OK 手势、舌头轻抵手指，地面散落纸团，整体色调柔和，写实光影。",
+    "tags": ["双马尾", "OK手势", "写实"]
+  },
+  {
+    "id": "xjt-005",
+    "name": "脚底趴沙发交叠",
+    "category": "convert",
+    "builtin": true,
+    "source": "local",
+    "prompt": "角色发型特征、面部特征不变，以脚底为主题，让人物正面朝下、背面朝上，整个人趴在一张松软沙发上，镜头采取从后方往前的直线平拍视角，看清角色脚底，双脚左脚在下、右脚在上，交叠式摆放，且脚尖全部朝下，后背被脚掌遮挡一部分，看起来懒散又放松，角色微微回头看向画面，人物不穿鞋，画面要突出角色原图脚底的细节，保证角色的脚小巧可爱，腿部光滑细腻有反光，确保每个脚趾数量都是5，符合人体构造，丁达尔效应，高质量，细节丰富，人物保持原画风，唯美插画，超高清，8k分辨率，阴影过渡自然。",
+    "tags": ["脚底", "趴姿", "细节"] 
+  },
+  {
+    "id": "xjt-007",
+    "name": "弯腰反手握臀",
+    "category": "convert",
+    "builtin": true,
+    "source": "local",
+    "prompt": "人物呈弯腰直背，大腿合拢，小腿呈现外小八字，双手在臀部边缘两上呈现，手指五指展开，反手握臀部，手不能出现多手多指错误，并在人物上模拟手指抓住柔软物体并嵌入的效果，姿态较为活泼具有张力，视角改在背部形成可爱风格，与整体的风格有反差感，显得灵动有趣。采用平视视角，镜头与人物处于同一水平高度，平等待的视觉交流感，中心构图，人物位于画面正中央，突出主体。",
+    "tags": ["弯腰", "反手", "构图"]
+  },
+  {
+    "id": "xjt-004",
+    "name": "日式跪姿仰头",
+    "category": "convert",
+    "builtin": true,
+    "source": "local",
+    "prompt": "场景:阳光充足，房间沙发上，嘴巴微张，眼神直视镜头。风格:日式动画细腻光影渲染。超写实艺术光影，画面发光，人物脸部精致，背景虚化营造氛围感。画质:超高清，8k分辨率，细节拉满，阴影过渡自然，跪姿仰头，身体成魅惑曲线姿态，手臂支撑身体的撩人身姿，头部后仰，展现颈部线条的性感动作，肢体姿势充满张力且富有挑逗性，腿大幅度岔开。镜头提示词:正面近景镜头，突出人物主体，低角度仰拍，4:3比例。",
+    "tags": ["跪姿", "仰头", "光影"]
+  },
+  {
+    "id": "xjt-008",
+    "name": "床上M字屈腿",
+    "category": "convert",
+    "builtin": true,
+    "source": "local",
+    "prompt": "人物躺在床中央，两个膝关节分别弯曲到左右胸前，两个小腿分别往各自外侧弯曲，同时左右手分别抓着两个小腿，呈现 M 字岔开，面容羞涩潮红，眼神直视镜头，原画风，服饰和发型特征不变，腿部光滑细腻有反光，脚步细节不能减少，头部微微倾斜，近大远小的透视，镜头焦点聚焦于腹部，并使脚部尽可能完整出现在镜头内，脚部精美完全符合人类脚底。",
+    "tags": ["M字", "屈腿", "透视"]
+  },
+  {
+    "id": "xjt-009",
+    "name": "写真雨伞握手",
+    "category": "convert",
+    "builtin": true,
+    "source": "local",
+    "prompt": "图片风格为写真风，质感光照，自然光线，质感十足，摄影风格，极致细节，高级感。画面少女有着冷白细腻的皮肤，水光感，眉眼微微抬眼看着镜头，带着慵懒朦胧的神态，眼神温柔地盯着镜头，中远距离，上半身，些许发丝遮挡眼前，迷朦朦胧感。背景为随机，少女左手撑着透明雨伞，雪从伞沿滴落，蹲在地上，以第一视角伸出手，与观者的手交握，并露出纤细的手指，画面运用了抖动、高斯模糊和动态模糊的效果，营造一种虚幻的氛围。保持周围景物不变，改为下雪天气。",
+    "tags": ["写真", "雨伞", "氛围"]
+  },
+  {
+    "id": "xjt-010",
+    "name": "床上俯拍上半身",
+    "category": "convert",
+    "builtin": true,
+    "source": "local",
+    "prompt": "角色躺柔软床上，歪头目视镜头，温柔害羞，脸微微泛红。手自然放在枕头两侧，掌心向上，手指自然弯曲微微握拳。近景，俯拍，画面只出现角色上半身特写，角色位于画面正中间，露肩。角色腿部光滑细腻有反光，不穿鞋，自然屈腿。背景去除，保留温馨床单即可。极致细节，4k 超高清，电影级渲染。",
+    "tags": ["床上", "俯拍", "特写"]
+  },
+  {
+    "id": "xjt-011",
+    "name": "俯视迷离手绘",
+    "category": "convert",
+    "builtin": true,
+    "source": "local",
+    "prompt": "保持眼神迷离俯视镜头。原画风，背景不变，超高清、超细腻的画面细节、真实的皮肤纹理、究极细节，高分辨率。渲染直出，精细，皮肤高光，曼妙身材，意识流，画面发光，背景质感，超高清，高品质，高质量，画面清晰，先进光线捕捉技术，专业后期处理优化，超越游戏引擎的渲染精度，真实细腻的皮肤质感，大师级影视级图像标准，超写实，渲染温馨浪漫的氛围，真实光影。手绘风格。",
+    "tags": ["俯视", "迷离", "手绘"]
+  },
+  {
+    "id": "xjt-012",
+    "name": "寝室快照氛围",
+    "category": "convert",
+    "builtin": true,
+    "source": "local",
+    "prompt": "18-22 岁亚洲女生站在寝室里，黑色短发蓬松微乱，右侧耳后编了细辫子，奶油色迷你丝带松松系在辫尾、稍显歪斜。她衣服还未穿好，双手举着还未穿上的运动泳衣挡在身前，露出线条柔和的肩颈与腰腹；眼尾微垂看向地面，嘴角抿着一丝软乎乎的羞涩，左脚轻轻踮起、踩在床边的灰色拖鞋边缘。背景是典型的寝室乱态：身后书桌堆着翻开的专业课课本、半杯剩了吸管的珍珠奶茶，床头挂着皱巴巴的卡通印花挂布，地上散落着两只白袜子，上铺床沿还垂着件粉色T恤。手机竖屏 9:16 拍摄的画面有点晃，人物偏左站，右上角多拍进了半块沾着污渍的墙皮，整体是没刻意整理的平庸日常快照感，头发梢还沾了根细绒毛，却透着自然的生活气。",
+    "tags": ["寝室", "快照", "生活"]
+  }
+]

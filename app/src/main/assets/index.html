@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<meta name="color-scheme" content="dark light">
+<title>GPTImage Studio</title>
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+<div id="app">
+  <!-- ===== 标题栏 ===== -->
+  <header id="titlebar">
+    <div class="titlebar-left">
+      <div class="logo">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+          <path d="M2 17l10 5 10-5"/>
+          <path d="M2 12l10 5 10-5"/>
+        </svg>
+      </div>
+      <span class="title-text">GPTImage <span class="tt-sub">Studio</span></span>
+    </div>
+    <div class="titlebar-right">
+      <button class="tb-btn" id="themeBtn" title="切换主题">
+        <svg class="icon-theme" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32l1.41 1.41M2 12h2m16 0h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/>
+        </svg>
+        <svg class="icon-theme-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- ===== 工作区标签栏 ===== -->
+  <div class="ws-bar" id="wsBar">
+    <div class="ws-list" id="wsList"></div>
+    <button class="ws-add" onclick="addWorkspace()" title="新建工作区">+</button>
+  </div>
+
+  <main id="content">
+    <!-- ===== 生成页 ===== -->
+    <div class="tab-page active" id="page-generate">
+      <div class="page-scroll">
+        <!-- API 状态 -->
+        <div class="api-status" id="apiStatus">
+          <span class="api-dot"></span>
+          <span class="api-text">未配置 API Key</span>
+          <button class="btn-link" onclick="switchTab('settings')">去设置</button>
+        </div>
+
+        <!-- 提示词 -->
+        <div class="section">
+          <label class="label">提示词</label>
+          <textarea id="promptInput" class="textarea" rows="3" placeholder="描述你想生成的图片&#10;例如: 一只橘猫坐在窗台上，窗外是城市夜景，赛博朋克风格"></textarea>
+          <div class="textarea-actions">
+            <div style="display:flex;gap:4px">
+              <button class="btn-icon" onclick="clearPrompt()" title="清空">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+              </button>
+              <button class="btn-icon" onclick="optimizePrompt()" title="AI 优化提示词" style="color:var(--accent)">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+              </button>
+              <button class="btn-icon" onclick="editAiOptimizePreset()" title="编辑 AI 优化提示词预设">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+              </button>
+            </div>
+            <span class="char-count" id="charCount">0</span>
+          </div>
+          <!-- 提示词历史 -->
+          <div class="prompt-history" id="promptHistorySection">
+            <div class="prompt-history-header">
+              <span class="param-label">历史提示词</span>
+              <button class="btn-sm" onclick="clearPromptHistory()" style="font-size:10px">清空</button>
+            </div>
+            <div class="prompt-history-list" id="promptHistoryList"></div>
+          </div>
+        </div>
+
+        <!-- 参考图 -->
+        <div class="section">
+          <label class="label">参考图 <span class="label-hint">（可选，图生图，支持多图）</span></label>
+          <div class="ref-image-area" id="refImageArea">
+            <div class="ref-list" id="refList"></div>
+            <div class="ref-upload" id="refUpload" onclick="pickImage()">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/>
+              </svg>
+              <span>点击上传参考图</span>
+            </div>
+            <div class="ref-tools">
+              <div class="ref-tools-head">AI 反推工具</div>
+              <div class="ref-tools-grid">
+                <button class="ref-tool" onclick="reversePromptFromRef()">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2.4 7.2L22 12l-7.6 2.8L12 22l-2.4-7.2L2 12l7.6-2.8z"/></svg>
+                  反推提示词
+                </button>
+                <button class="ref-tool" onclick="reversePoseFromRef()">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2.4 7.2L22 12l-7.6 2.8L12 22l-2.4-7.2L2 12l7.6-2.8z"/></svg>
+                  姿态反推
+                </button>
+                <button class="ref-tool" onclick="fillFeaturesFromRef()">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2.4 7.2L22 12l-7.6 2.8L12 22l-2.4-7.2L2 12l7.6-2.8z"/></svg>
+                  填充特征
+                </button>
+                <button class="ref-tool" onclick="editReversePreset()">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                  编辑反推要求
+                </button>
+              </div>
+            </div>
+          </div>
+          <!-- 批处理容器 -->
+          <div id="batchContainer"></div>
+        </div>
+
+        <!-- 参数面板 -->
+        <div class="section">
+          <div class="param-header" onclick="toggleParams()">
+            <label class="label" style="margin:0">参数设置</label>
+            <svg class="chevron" id="paramChevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+          <div class="param-grid" id="paramGrid">
+            <!-- 模型 -->
+            <div class="param-row">
+              <span class="param-label">模型</span>
+              <div class="cs-select" id="csModel">
+                <button class="cs-trigger" onclick="toggleCustomSelect(this)" data-value="">
+                  <span class="cs-label">模型</span>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+                </button>
+                <div class="cs-menu" id="csModelMenu"></div>
+              </div>
+            </div>
+            <!-- 尺寸 -->
+            <div class="param-row">
+              <span class="param-label">尺寸</span>
+              <div class="size-btns" id="sizeBtns">
+                <button class="size-btn active" data-size="1024x1024" onclick="setSize(this)">1:1</button>
+                <button class="size-btn" data-size="1536x1024" onclick="setSize(this)">3:2</button>
+                <button class="size-btn" data-size="1024x1536" onclick="setSize(this)">2:3</button>
+                <button class="size-btn" data-size="1792x1024" onclick="setSize(this)">16:9</button>
+                <button class="size-btn" data-size="1024x1792" onclick="setSize(this)">9:16</button>
+                <button class="size-btn size-btn-add" onclick="addCustomSize()" title="自定义分辨率">+</button>
+              </div>
+              <div class="size-btns" id="customSizes" style="margin-top:4px"></div>
+              <div class="size-input-row">
+                <input type="number" id="sizeW" class="input" min="128" placeholder="宽" inputmode="numeric">
+                <span class="size-x">×</span>
+                <input type="number" id="sizeH" class="input" min="128" placeholder="高" inputmode="numeric">
+              </div>
+            </div>
+            <!-- 质量 -->
+            <div class="param-row">
+              <span class="param-label">质量</span>
+              <div class="pill-group" id="qualityGroup">
+                <button class="pill" data-val="auto" onclick="setQuality(this)">Auto</button>
+                <button class="pill" data-val="low" onclick="setQuality(this)">低</button>
+                <button class="pill active" data-val="medium" onclick="setQuality(this)">中</button>
+                <button class="pill" data-val="high" onclick="setQuality(this)">高</button>
+              </div>
+            </div>
+            <!-- 格式 -->
+            <div class="param-row">
+              <span class="param-label">格式</span>
+              <div class="pill-group" id="formatGroup">
+                <button class="pill active" data-val="png" onclick="setFormat(this)">PNG</button>
+                <button class="pill" data-val="jpeg" onclick="setFormat(this)">JPEG</button>
+                <button class="pill" data-val="webp" onclick="setFormat(this)">WebP</button>
+              </div>
+            </div>
+            <!-- 数量 -->
+            <div class="param-row">
+              <span class="param-label">数量</span>
+              <div class="pill-group" id="nGroup">
+                <button class="pill active" data-val="1" onclick="setN(this)">1</button>
+                <button class="pill" data-val="2" onclick="setN(this)">2</button>
+                <button class="pill" data-val="4" onclick="setN(this)">4</button>
+              </div>
+            </div>
+            <!-- 风格 -->
+            <div class="param-row">
+              <span class="param-label">风格</span>
+              <div class="pill-group" id="styleGroup">
+                <button class="pill active" data-val="" onclick="setStyle(this)">无</button>
+                <button class="pill" data-val="vivid" onclick="setStyle(this)">鲜艳</button>
+                <button class="pill" data-val="natural" onclick="setStyle(this)">自然</button>
+                <button class="pill" data-val="anime" onclick="setStyle(this)">动漫</button>
+                <button class="pill" data-val="watercolor" onclick="setStyle(this)">水彩</button>
+                <button class="pill" data-val="oil-painting" onclick="setStyle(this)">油画</button>
+                <button class="pill" data-val="3d-render" onclick="setStyle(this)">3D</button>
+              </div>
+            </div>
+            <!-- Seed -->
+            <div class="param-row">
+              <span class="param-label">Seed <span class="label-hint">（留空随机）</span></span>
+              <input type="number" id="seedInput" class="input" placeholder="随机" min="0">
+            </div>
+            <!-- Negative Prompt -->
+            <div class="param-row">
+              <span class="param-label">负面提示词 <span class="label-hint">（可选）</span></span>
+              <textarea id="negPromptInput" class="textarea" rows="2" placeholder="不希望出现的元素"></textarea>
+            </div>
+            <!-- 背景 -->
+            <div class="param-row">
+              <span class="param-label">背景</span>
+              <div class="pill-group" id="bgGroup">
+                <button class="pill active" data-val="auto" onclick="setBg(this)">自动</button>
+                <button class="pill" data-val="opaque" onclick="setBg(this)">不透明</button>
+                <button class="pill" data-val="transparent" onclick="setBg(this)">透明</button>
+              </div>
+            </div>
+            <!-- 审核 -->
+            <div class="param-row">
+              <span class="param-label">审核</span>
+              <div class="pill-group" id="modGroup">
+                <button class="pill active" data-val="auto" onclick="setModeration(this)">自动</button>
+                <button class="pill" data-val="low" onclick="setModeration(this)">宽松</button>
+              </div>
+            </div>
+            <!-- 输入保真 -->
+            <div class="param-row">
+              <span class="param-label">输入保真</span>
+              <div class="pill-group" id="fidGroup">
+                <button class="pill active" data-val="auto" onclick="setFidelity(this)">自动</button>
+                <button class="pill" data-val="low" onclick="setFidelity(this)">低</button>
+                <button class="pill" data-val="high" onclick="setFidelity(this)">高</button>
+              </div>
+            </div>
+            <!-- 输出压缩 -->
+            <div class="param-row">
+              <span class="param-label">输出压缩 <span class="label-hint">（0-100）</span></span>
+              <input type="number" id="compressionInput" class="input" placeholder="默认" min="0" max="100">
+            </div>
+            <!-- 用户标识 -->
+            <div class="param-row">
+              <span class="param-label">用户标识 <span class="label-hint">（可选）</span></span>
+              <input type="text" id="userIdentifierInput" class="input" placeholder="user-...">
+            </div>
+          </div>
+        </div>
+
+        <!-- 参数预设 -->
+        <div class="section">
+          <div class="param-header" onclick="document.getElementById('presetSection').classList.toggle('open')">
+            <label class="label" style="margin:0">参数预设</label>
+            <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+          <div class="param-grid" id="presetSection">
+            <button class="btn-sm btn-accent" onclick="saveCurrentAsPreset()" style="width:100%">保存当前参数为预设</button>
+            <div id="presetList"></div>
+          </div>
+        </div>
+
+        <!-- 生成按钮 -->
+        <div class="section">
+          <button class="btn-generate" id="generateBtn" onclick="generate()">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+            </svg>
+            <span>开始生成</span>
+          </button>
+        </div>
+
+        <!-- 生成状态 -->
+        <div class="gen-status hidden" id="genStatus">
+          <div class="gen-spinner"></div>
+          <span id="genStatusText">生成中...</span>
+          <button class="btn-sm" onclick="cancelGeneration()">取消</button>
+        </div>
+
+        <!-- 结果区 -->
+        <div class="result-area hidden" id="resultArea">
+          <div class="result-grid" id="resultGrid"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== 历史页 ===== -->
+    <div class="tab-page" id="page-history">
+      <div class="page-scroll">
+        <!-- 当前任务状态 -->
+        <div class="task-status-card" id="taskStatusCard">
+          <div class="task-status-head">
+            <span class="task-status-label">当前任务</span>
+            <span class="task-status-badge" id="taskStatusBadge">空闲</span>
+          </div>
+          <div class="task-status-body" id="taskStatusBody">暂无进行中的任务</div>
+        </div>
+        <!-- 参考图历史 (用户管理, 不自动删) -->
+        <div class="history-toolbar">
+          <button class="btn-sm" onclick="switchTab('refhistory')" style="flex:1;justify-content:center">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" width="13" height="13"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+            参考图历史 (<span id="refHistoryCount">0</span>)
+          </button>
+        </div>
+        <!-- 搜索栏 -->
+        <div class="history-search">
+          <input type="text" id="historySearch" class="input" placeholder="搜索提示词...">
+        </div>
+        <!-- 筛选 + 工具栏 -->
+        <div class="history-toolbar">
+          <div class="history-filter-group">
+            <button class="history-filter-btn active" data-mode="all" onclick="setHistoryMode('all')">全部</button>
+            <button class="history-filter-btn" data-mode="gen" onclick="setHistoryMode('gen')">生成</button>
+            <button class="history-filter-btn" data-mode="edit" onclick="setHistoryMode('edit')">编辑</button>
+          </div>
+          <div style="display:flex;gap:4px;align-items:center">
+            <span class="history-count" id="historyCount">0 张图片</span>
+            <button class="icon-btn-sm" onclick="exportHistory()" title="导出">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            </button>
+            <button class="icon-btn-sm" onclick="importHistory()" title="导入">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+            </button>
+            <button class="icon-btn-sm" onclick="clearHistory()" title="清空">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+            </button>
+          </div>
+        </div>
+        <div class="history-empty hidden" id="historyEmpty">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/>
+          </svg>
+          <span>暂无历史记录</span>
+        </div>
+        <div class="history-grid" id="historyGrid"></div>
+      </div>
+    </div>
+
+    <!-- ===== 参考图历史页 ===== -->
+    <div class="tab-page" id="page-refhistory">
+      <div class="page-scroll">
+        <div class="history-toolbar">
+          <span class="label" style="margin:0">参考图历史</span>
+          <div style="display:flex;gap:4px">
+            <button class="btn-sm" onclick="clearRefHistory()" style="color:var(--error)">清空</button>
+            <button class="btn-sm" onclick="switchTab('history')">返回</button>
+          </div>
+        </div>
+        <span class="input-hint">上传过的参考图记录于此，不自动删除；可作「完善提示词 / 原图对比」的原图</span>
+        <div class="ref-history-grid" id="refHistoryGrid"></div>
+      </div>
+    </div>
+
+    <!-- ===== 设置页 ===== -->
+    <div class="tab-page" id="page-settings">
+      <div class="page-scroll">
+        <!-- 多 API 配置 -->
+        <div class="section">
+          <h2 class="section-title">API 配置</h2>
+          <div class="setting-card">
+            <div class="profile-toolbar">
+              <span class="param-label">配置列表</span>
+              <button class="btn-sm btn-accent" onclick="addProfile()">+ 添加</button>
+            </div>
+            <div id="profileList"></div>
+          </div>
+          <div class="setting-card">
+            <label class="label">API 形态</label>
+            <div class="cs-select" id="csApiMode">
+              <button class="cs-trigger" onclick="toggleCustomSelect(this)" data-value="responses">
+                <span class="cs-label">Responses API (推荐，抗超时)</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+              </button>
+              <div class="cs-menu">
+                <button class="cs-option active" data-value="responses" onclick="pickCustomSelect(this, 'apiMode')">Responses API (推荐，抗超时)</button>
+                <button class="cs-option" data-value="images" onclick="pickCustomSelect(this, 'apiMode')">Images API (标准)</button>
+              </div>
+            </div>
+            <span class="input-hint">Responses = /v1/responses；Images = /v1/images/generations 与 edits</span>
+          </div>
+          <div class="setting-card">
+            <label class="label">Base URL</label>
+            <input type="text" id="baseUrlInput" class="input" placeholder="https://api.openai.com" value="https://api.openai.com">
+            <span class="input-hint">支持 OpenAI 官方或兼容中转站</span>
+          </div>
+          <div class="setting-card">
+            <label class="label">API Key</label>
+            <div class="key-input-row">
+              <input type="password" id="apiKeyInput" class="input" placeholder="sk-...">
+              <button class="btn-sm" onclick="toggleKeyVisibility()">
+                <svg class="icon-eye" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                <svg class="icon-eye-off hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>
+              </button>
+            </div>
+            <button class="btn-test" id="testBtn" onclick="testConnection()">测试连接</button>
+            <div class="test-result hidden" id="testResult"></div>
+          </div>
+        </div>
+
+        <!-- 焚决生成 LLM 配置 -->
+        <div class="section">
+          <h2 class="section-title">焚决生成 LLM</h2>
+          <div class="setting-card">
+            <div class="llm-config">
+              <button class="btn-sm" onclick="editLlmField('baseUrl')">Base URL: <span id="llmBaseUrlVal">未配置</span></button>
+              <button class="btn-sm" onclick="editLlmField('apiKey')">API Key: <span id="llmApiKeyVal">未配置</span></button>
+              <button class="btn-sm" onclick="toggleLlmModelMenu(this)">模型: <span id="llmModelVal">deepseek-chat</span><span class="llm-menu" id="llmModelMenu"></span></button>
+            </div>
+            <span style="display:block;margin-top:8px">
+              <button class="btn-sm btn-accent" onclick="editAiPreset()">编辑 AI 生成焚决预设提示词</button>
+              <span class="pp-state" id="aiPresetVal" style="margin-left:6px"></span>
+            </span>
+            <span class="input-hint">用于焚决生成 / AI 优化提示词的文本模型 API；图片反推使用下方独立的「视觉模型」配置</span>
+          </div>
+        </div>
+
+        <!-- 视觉模型（图片反推）独立配置 -->
+        <div class="section">
+          <h2 class="section-title">视觉模型（图片反推）</h2>
+          <div class="setting-card">
+            <div class="llm-config">
+              <button class="btn-sm" onclick="editVisionField('baseUrl')">Base URL: <span id="visionBaseUrlVal">https://api.deepseek.com</span></button>
+              <button class="btn-sm" onclick="editVisionField('apiKey')">API Key: <span id="visionApiKeyVal">未配置</span></button>
+              <button class="btn-sm" style="width:100%;justify-content:space-between" onclick="toggleVisionModelMenu(this)">视觉模型: <span id="visionModelVal">未配置</span><span class="llm-menu" id="visionModelMenu"></span></button>
+            </div>
+            <div style="margin-top:8px">
+              <span class="param-label">反推要求预设</span>
+              <div class="pill-group">
+                <button class="pill reverse-preset-btn active" data-val="detail" onclick="setReversePreset('detail')">细节版</button>
+                <button class="pill reverse-preset-btn" data-val="simple" onclick="setReversePreset('simple')">简洁版</button>
+                <button class="pill reverse-preset-btn" data-val="custom" onclick="setReversePreset('custom')">自定义</button>
+              </div>
+              <span class="param-label" style="margin-top:6px;display:block">细节版/简洁版为内置固定模板；自定义供你编辑</span>
+              <div style="display:flex;gap:6px;margin-top:6px">
+                <button class="btn-sm" onclick="editReversePresetPrompt()" id="editReverseBtn">编辑自定义</button>
+                <button class="btn-sm" onclick="resetReversePreset()" style="color:var(--fg-dim)" id="resetReverseBtn">恢复默认</button>
+              </div>
+            </div>
+            <span class="input-hint">反推要求控制返回提示词的详细度（细节版含服饰/瞳色/发饰等，简洁版精简）</span>
+          </div>
+        </div>
+
+        <!-- 显示设置 -->
+        <div class="section">
+          <h2 class="section-title">显示</h2>
+          <div class="setting-card">
+            <div class="switch-row">
+              <span class="switch-label">深色模式</span>
+              <label class="switch">
+                <input type="checkbox" id="darkModeToggle" checked onchange="toggleTheme()">
+                <span class="slider"></span>
+              </label>
+            </div>
+          </div>
+          <div class="setting-card">
+            <label class="label">输出目录</label>
+            <input type="text" id="outputDirInput" class="input" placeholder="应用私有目录">
+            <span class="input-hint">默认保存到应用私有目录（免权限，Android 11+ 可直接写入）；如需保存到公共目录(如 Pictures/)，需授予「所有文件访问权限」</span>
+          </div>
+          <div class="setting-card">
+            <label class="label">文件访问权限</label>
+            <div class="perm-card" id="permStatus">
+              <span class="perm-status" id="permStatusText">检查中…</span>
+              <button class="btn-sm" onclick="requestAllFilesAccess()" style="flex:0 0 auto">授予权限</button>
+            </div>
+          </div>
+          <div class="setting-card">
+            <div class="switch-row">
+              <span class="switch-label">调试服务器</span>
+              <label class="switch">
+                <input type="checkbox" id="debugServerToggle" onchange="toggleDebugServer()">
+                <span class="slider"></span>
+              </label>
+            </div>
+            <span class="input-hint">局域网内浏览器访问 http://&lt;IP&gt;:19864/ 实时查看日志</span>
+          </div>
+          <div class="setting-card">
+            <button class="btn-sm" onclick="openLogPage()" style="width:100%;justify-content:center">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" width="14" height="14"><path d="M4 6h16M4 12h16M4 18h10"/></svg>
+              查看调试日志
+            </button>
+          </div>
+          <div class="setting-card">
+            <label class="label">参数策略</label>
+            <div class="pill-group">
+              <button class="pill req-policy-btn active" data-val="standard" onclick="setRequestPolicy('standard')">OpenAI 标准</button>
+              <button class="pill req-policy-btn" data-val="relay" onclick="setRequestPolicy('relay')">兼容中转扩展</button>
+            </div>
+            <span class="input-hint">标准=只发官方字段；中转扩展=额外发送 seed/negative_prompt 等</span>
+          </div>
+        </div>
+
+        <!-- 关于 -->
+        <div class="section">
+          <h2 class="section-title">关于</h2>
+          <div class="setting-card about-card">
+            <div class="about-name">GPTImage Studio</div>
+            <div class="about-ver">v1.1.0</div>
+            <div class="about-desc">基于 OpenAI GPT Image API 的图像生成与编辑工具</div>
+            <div class="about-links">
+              <a href="https://platform.openai.com/docs/guides/image-generation" target="_blank">OpenAI 文档</a>
+              <span class="about-sep">·</span>
+              <a href="https://github.com" target="_blank">GitHub</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== 焚决页 ===== -->
+    <div class="tab-page" id="page-prompts">
+      <div class="page-scroll">
+        <!-- 标题 + 操作工具条 -->
+        <div class="prompt-toolbar">
+          <div class="prompt-toolbar-left">
+            <span class="prompt-total" id="promptTotal">0 焚决</span>
+          </div>
+          <div class="prompt-toolbar-right">
+            <button class="btn-sm btn-accent" onclick="aiGeneratePrompt()" title="用 AI 生成新焚决(自动入库)">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" width="13" height="13"><path d="M12 2l2.4 7.2L22 12l-7.6 2.8L12 22l-2.4-7.2L2 12l7.6-2.8z"/></svg>
+              AI 生成
+            </button>
+            <button class="icon-btn-sm" onclick="exportPrompts()" title="导出焚决">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            </button>
+            <button class="icon-btn-sm" onclick="importPrompts()" title="导入焚决">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+            </button>
+            <button class="btn-sm" onclick="toggleManageMode()" title="选择焚决">管理</button>
+            <button class="btn-sm" onclick="addPrompt()">+ 添加</button>
+          </div>
+        </div>
+        <!-- 分类筛选 -->
+        <div class="prompt-cats" id="promptCats"></div>
+
+        <!-- 焚决列表 -->
+        <div class="prompt-list" id="promptList"></div>
+      </div>
+    </div>
+
+    <!-- ===== 日志页 ===== -->
+    <div class="tab-page" id="page-logs">
+      <div class="page-scroll">
+        <div class="log-toolbar">
+          <span class="label" style="margin:0">调试日志</span>
+          <div style="display:flex;gap:4px">
+            <button class="btn-sm" onclick="openLogPage()">刷新</button>
+            <button class="btn-sm" onclick="clearDebugLogs()" style="color:var(--error)">清空</button>
+            <button class="btn-sm" onclick="switchTab('settings')">返回</button>
+          </div>
+        </div>
+        <pre class="debug-log-view" id="debugLogView">加载中…</pre>
+      </div>
+    </div>
+  </main>
+
+  <!-- ===== 底部导航 ===== -->
+  <nav id="bottombar">
+    <button class="nav-btn active" data-page="generate" onclick="switchTab('generate')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+      </svg>
+      <span>生成</span>
+    </button>
+    <button class="nav-btn" data-page="history" onclick="switchTab('history')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/>
+      </svg>
+      <span>历史</span>
+    </button>
+    <button class="nav-btn" data-page="prompts" onclick="switchTab('prompts')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 2l2.4 7.2L22 12l-7.6 2.8L12 22l-2.4-7.2L2 12l7.6-2.8z"/>
+      </svg>
+      <span>焚决</span>
+    </button>
+    <button class="nav-btn" data-page="settings" onclick="switchTab('settings')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+      </svg>
+      <span>设置</span>
+    </button>
+  </nav>
+
+  <!-- ===== 图片预览弹窗 ===== -->
+  <div class="modal-mask hidden" id="previewModal" onclick="closePreview(event)">
+    <div class="preview-card" onclick="event.stopPropagation()">
+      <img id="previewImage" src="" alt="预览">
+      <div class="preview-actions">
+        <button class="btn-sm" onclick="openPreviewEditor()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+          画布编辑
+        </button>
+        <button class="btn-sm hidden" id="refinePreviewBtn" onclick="refinePreviewWithImage()" title="用此图与原图对比，完善反推提示词">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" width="13" height="13"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>
+          完善提示词
+        </button>
+        <button class="btn-sm hidden" id="refComparePreviewBtn" onclick="openRefComparePreview()" title="生成图与原图分屏对比查看">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" width="13" height="13"><path d="M12 3v18"/><rect x="3" y="3" width="18" height="18" rx="2"/></svg>
+          原图对比
+        </button>
+        <button class="btn-sm" onclick="copyPromptFromPreview()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+          复制提示词
+        </button>
+        <button class="btn-sm btn-accent" onclick="savePreviewImage()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          保存
+        </button>
+        <button class="btn-sm" onclick="closePreview()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== 左右分屏对比弹窗 ===== -->
+  <div class="modal-mask hidden" id="compareModal" onclick="closeHistoryCompare(event)">
+    <div class="compare-card" onclick="event.stopPropagation()">
+      <div class="compare-header">
+        <span class="compare-title">原图对比</span>
+        <button class="btn-sm" onclick="closeHistoryCompare()">关闭</button>
+      </div>
+      <div class="compare-stage" id="compareStage">
+        <span class="compare-lbl lbl-a">原图</span>
+        <span class="compare-lbl lbl-b">生成图</span>
+        <img id="compareImgA" class="compare-base" alt="参考原图">
+        <img id="compareImgB" class="compare-overlay" alt="生成图">
+        <div class="compare-divider" id="compareDivider"></div>
+      </div>
+      <div class="compare-prompt" id="comparePrompt"></div>
+    </div>
+  </div>
+
+  <!-- ===== 通用对话框 ===== -->
+  <div class="dialog-mask hidden" id="dialog">
+    <div class="dialog-card" id="dialogCard">
+      <!-- 输入模式 -->
+      <div class="dialog-input-mode">
+        <div class="dialog-title" id="dialogTitle">标题</div>
+        <input type="text" class="dialog-input" id="dialogInput" placeholder="请输入">
+        <textarea class="dialog-textarea" id="dialogTextarea" rows="4" placeholder="请输入"></textarea>
+        <div class="dialog-actions">
+          <button class="dialog-btn dialog-cancel" onclick="dialogCancel()">取消</button>
+          <button class="dialog-btn dialog-ok" id="dialogOkBtn" onclick="dialogOk()">确定</button>
+        </div>
+      </div>
+      <!-- 选项模式 (选择反推类型等) -->
+      <div class="dialog-select-mode">
+        <div class="dialog-title" id="selectTitle">选择</div>
+        <div class="select-options" id="selectOptions"></div>
+        <div class="dialog-actions">
+          <button class="dialog-btn dialog-cancel" onclick="dialogCancel()">取消</button>
+        </div>
+      </div>
+      <!-- 表单模式(多字段: AI生成焚决) -->
+      <div class="dialog-form-mode">
+        <div class="dialog-title">AI 生成焚决</div>
+        <label class="dialog-flabel">题材 (可留空用默认)</label>
+        <input type="text" class="dialog-input" id="dfTopic" placeholder="元气可爱甜美少女">
+        <label class="dialog-flabel">分类</label>
+        <div class="select-wrap"><select id="dfCat" class="dialog-input">
+          <option value="reality">现实</option><option value="anime">二次元</option>
+          <option value="illustration">插画</option><option value="landscape">风景</option>
+          <option value="sci-fi">科幻</option><option value="portrait">人物</option>
+          <option value="photo">摄影</option><option value="design">设计</option><option value="convert">图生图转换</option>
+        </select></div>
+        <label class="dialog-flabel">数量 (1-20)</label>
+        <input type="number" class="dialog-input" id="dfCount" placeholder="3">
+        <div class="dialog-actions">
+          <button class="dialog-btn dialog-cancel" onclick="dialogCancel()">取消</button>
+          <button class="dialog-btn dialog-ok" onclick="dialogOk()">生成</button>
+        </div>
+      </div>
+      <!-- 编辑焚决模式(单窗口: 名称+内容) -->
+      <div class="dialog-form-mode" data-edit="1">
+        <div class="dialog-title">编辑焚决</div>
+        <label class="dialog-flabel">名称</label>
+        <input type="text" class="dialog-input" id="efName" placeholder="焚决名称">
+        <label class="dialog-flabel">内容 (提示词)</label>
+        <textarea class="dialog-textarea" id="efPrompt" rows="6" placeholder="提示词内容"></textarea>
+        <div class="dialog-actions">
+          <button class="dialog-btn dialog-cancel" onclick="dialogCancel()">取消</button>
+          <button class="dialog-btn dialog-ok" onclick="dialogOk()">保存</button>
+        </div>
+      </div>
+      <!-- 确认模式 -->
+      <div class="dialog-confirm-mode">
+        <div class="dialog-title" id="dialogConfirmTitle">确认</div>
+        <div class="dialog-msg" id="dialogMsg">确定要执行此操作吗？</div>
+        <div class="dialog-actions">
+          <button class="dialog-btn dialog-cancel" onclick="dialogCancel()">取消</button>
+          <button class="dialog-btn dialog-ok" id="dialogConfirmOkBtn" onclick="dialogOk()">确定</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== Toast ===== -->
+  <div class="toast hidden" id="toast"></div>
+</div>
+<script src="batch-mode.js"></script>
+<script src="canvas-editor.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
